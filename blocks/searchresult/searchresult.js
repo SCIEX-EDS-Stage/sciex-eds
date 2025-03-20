@@ -1,4 +1,4 @@
-import {} from '../../scripts/aem.js';
+import { } from '../../scripts/aem.js';
 import { searchEngine } from '../../scripts/searchresult/engine.js';
 import renderSearchBox from '../../scripts/searchresult/components/renderSearchBox.js';
 import renderSearchResults from '../../scripts/searchresult/components/renderSearchResult.js';
@@ -282,6 +282,10 @@ export default async function decorate(block) {
   coveoNoResultsDiv.id = 'coveo-no-results';
   coveoNoResultsDiv.style.display = 'none';
 
+  const qualtricsDiv = document.createElement('div');
+  qualtricsDiv.id = 'ZN_b4z8pJnZ6X9z32B';
+  document.body.appendChild(qualtricsDiv);
+
   // Create life sciences div
   const lifeSciencesDiv = document.createElement('div');
   lifeSciencesDiv.id = 'coveo-life-sciences';
@@ -293,6 +297,7 @@ export default async function decorate(block) {
     main.innerHTML = html;
     const sections = main.querySelector('.searchresult').children;
     block.textContent = '';
+    //block.append(qualtricsDiv);
     Array.from(sections).forEach((section, index) => {
       const iteration = index + 1;
       if (iteration === 1) {
@@ -316,7 +321,7 @@ export default async function decorate(block) {
       }
     });
   }
-
+  
   // Create pagination div
   const paginationDiv = document.createElement('div');
   paginationDiv.id = 'pagination';

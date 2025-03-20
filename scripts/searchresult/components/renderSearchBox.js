@@ -1,4 +1,5 @@
-import { searchBoxController } from '../controller/controllers.js';
+import { searchBoxController, headlessResultsList } from '../controller/controllers.js';
+import { getCookie } from '../../scripts.js';
 
 const renderSearchBox = () => {
   const queryInput = document.getElementById('coveo-query');
@@ -62,12 +63,26 @@ const renderSearchBox = () => {
     }
   });
 
+  function setSearchSurveyCookie() {
+    const searchcookieValue = getCookie('searchSurvey');
+    if (searchcookieValue != 'visited') {
+      const showSearchSurvey = 'true';
+      const d = new Date();
+      d.setTime(d.getTime() + (6 * 60 * 60 * 1000));
+      const expires = `expires=${d.toUTCString()}`;
+      document.cookie = 'searchSurvey' + '=' + 'visited' + `;secure=true;path=/;${expires}`;
+    }
+  }
   queryInput.addEventListener('keydown', (event) => {
     searchTermValue.innerHTML = '';
     searchTermValue.innerHTML = event.target.value;
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
       searchTermContainer.style.display = 'block';
       searchBoxController.submit();
+      if (headlessResultsList.state && headlessResultsList.state.results && headlessResultsList.state.results.length > 0) {
+        console.log('Results ::', headlessResultsList.state.results);
+        setSearchSurveyCookie();
+      }
       showResults();
     }
     if (event.key === 'Backspace') {
