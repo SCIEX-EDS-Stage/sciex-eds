@@ -8,11 +8,8 @@ export default async function buildAutoBlocks() {
     const headerBlock = buildBlock('header', { elems: [] });
     section.append(headerBlock);
   }
-  const courseCatalogDiv = section.querySelector('div. coursecatalog-search');
-  if (courseCatalogDiv) {
-    const courseCatalogBlock = buildBlock(' coursecatalog-search', { elems: [] });
-    section.append(courseCatalogBlock);
-  }
+  const courseCatalogBlock = buildBlock(' coursecatalog', { elems: [] });
+  section.append(courseCatalogBlock);
   const footerDiv = section.querySelector('div.footer');
   if (footerDiv) {
     const footerBlock = buildBlock('footer', { elems: [] });
