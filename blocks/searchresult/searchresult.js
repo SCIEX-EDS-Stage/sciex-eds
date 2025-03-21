@@ -297,7 +297,7 @@ export default async function decorate(block) {
     main.innerHTML = html;
     const sections = main.querySelector('.searchresult').children;
     block.textContent = '';
-    //block.append(qualtricsDiv);
+    // block.append(qualtricsDiv);
     Array.from(sections).forEach((section, index) => {
       const iteration = index + 1;
       if (iteration === 1) {
@@ -321,7 +321,7 @@ export default async function decorate(block) {
       }
     });
   }
-  
+
   // Create pagination div
   const paginationDiv = document.createElement('div');
   paginationDiv.id = 'pagination';
