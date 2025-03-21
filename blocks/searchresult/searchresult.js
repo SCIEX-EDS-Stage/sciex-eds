@@ -1,4 +1,4 @@
-import { } from '../../scripts/aem.js';
+import {} from '../../scripts/aem.js';
 import { searchEngine } from '../../scripts/searchresult/engine.js';
 import renderSearchBox from '../../scripts/searchresult/components/renderSearchBox.js';
 import renderSearchResults from '../../scripts/searchresult/components/renderSearchResult.js';
@@ -297,7 +297,7 @@ export default async function decorate(block) {
     main.innerHTML = html;
     const sections = main.querySelector('.searchresult').children;
     block.textContent = '';
-    // block.append(qualtricsDiv);
+    //block.append(qualtricsDiv);
     Array.from(sections).forEach((section, index) => {
       const iteration = index + 1;
       if (iteration === 1) {
@@ -355,7 +355,8 @@ export default async function decorate(block) {
   // Append the main search result div to the body or any specific container
   block.append(searchResultDiv);
 
-  // Create suggestion popup div
+  // Create suggestion popup divgit 
+  
   const suggestionPopupDiv = document.createElement('div');
   suggestionPopupDiv.id = 'suggestion-popup';
 

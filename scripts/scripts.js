@@ -218,7 +218,6 @@ export function createElement(tagName, classes, props, html) {
 
 loadPage();
 
-/* tslint:disable:no-console */
 (function () {
   const g = function (e, h, f, g) {
     this.get = function (a) { for (var a = `${a}=`, c = document.cookie.split(';'), b = 0, e = c.length; b < e; b++) { for (var d = c[b]; d.charAt(0) == ' ';)d = d.substring(1, d.length); if (d.indexOf(a) == 0) return d.substring(a.length, d.length); } return null; };
@@ -234,4 +233,3 @@ loadPage();
 
   try { (new g(100, 'r', 'QSI_S_ZN_b4z8pJnZ6X9z32B', 'https://znb4z8pjnz6x9z32b-sciex.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_b4z8pJnZ6X9z32B')).start(); } catch (i) {}
 }());
-/* eslint-enable no-console */
