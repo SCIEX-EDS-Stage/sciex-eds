@@ -239,10 +239,6 @@ export function createElement(tagName, classes, props, html) {
 }
 
 function qualtricsFeedback() {
-  const qualtricsDiv = document.createElement('div');
-  qualtricsDiv.id = 'ZN_b4z8pJnZ6X9z32B';
-  document.body.appendChild(qualtricsDiv);
-
   (function () {
     const g = function (e, h, f, g) {
       this.get = function (a) { for (var a = `${a}=`, c = document.cookie.split(';'), b = 0, e = c.length; b < e; b++) { for (var d = c[b]; d.charAt(0) == ' ';)d = d.substring(1, d.length); if (d.indexOf(a) == 0) return d.substring(a.length, d.length); } return null; };
