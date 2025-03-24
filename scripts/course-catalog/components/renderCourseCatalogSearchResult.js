@@ -74,7 +74,9 @@ const renderCourseCatalogSearchResults = () => {
 
       const courseInfo = document.createElement('div');
       courseInfo.className = 'course-info';
-      courseInfo.innerHTML = `Duration : ${result.raw.duration || '1 day'} | Language : ${result.raw.language || 'German'} | Type : at SCIEX | Course Level : Intermediate | Rating : `;
+      let duration = result.raw.duration ? `Duration : ${result.raw.duration}` : '';
+      let language = result.raw.language ? `Language : ${result.raw.language}` : '';
+      courseInfo.innerHTML = `${duration} | ${language} | Type : at SCIEX | Course Level : Intermediate | Rating : `;
 
       const ratingContainer = document.createElement('span');
       ratingContainer.className = 'rating';
