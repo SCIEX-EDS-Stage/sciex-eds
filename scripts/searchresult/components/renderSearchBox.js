@@ -66,7 +66,7 @@ const renderSearchBox = () => {
   function setSearchSurveyCookie() {
     const searchcookieValue = getCookie('searchSurvey');
     if (searchcookieValue !== 'visited') {
-      // var showSearchSurvey = "true";
+      const showSearchSurvey = 'true'; // eslint-disable-line no-unused-vars
       const d = new Date();
       d.setTime(d.getTime() + (6 * 60 * 60 * 1000));
       const expires = `expires=${d.toUTCString()}`;
