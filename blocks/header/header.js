@@ -964,7 +964,7 @@ function createMegaMenuThirdLevel(child) {
               listdiv.append(picDiv);
             }
             thirdPartdiv.append(listdiv);
-            if(section.nextElementSibling && section.nextElementSibling.querySelector('picture')) {
+            if (section.nextElementSibling && section.nextElementSibling.querySelector('picture')) {
               thirdPartdiv.append(document.createElement('br'));
             }
           }
@@ -1053,7 +1053,7 @@ function createMegaMenuThirdLevel(child) {
               listdiv.append(picDiv);
             }
             thirdPartdiv.append(listdiv);
-            if(section.nextElementSibling && section.nextElementSibling.querySelector('picture')) {
+            if (section.nextElementSibling && section.nextElementSibling.querySelector('picture')) {
               thirdPartdiv.append(document.createElement('br'));
             }
           }

@@ -1,20 +1,17 @@
 import {} from '../../scripts/aem.js';
-import { searchEngine } from '../../scripts/searchresult/engine.js';
-import renderSearchBox from '../../scripts/searchresult/components/renderSearchBox.js';
-import renderSearchResults from '../../scripts/searchresult/components/renderSearchResult.js';
-import {
-  callCreateFacet,
-  handleMobileFilters,
-} from '../../scripts/searchresult/components/categoryFacets.js';
-import renderPagination from '../../scripts/searchresult/components/pagination.js';
-import renderQuerySummary from '../../scripts/searchresult/components/querySummary.js';
-import renderSorting from '../../scripts/searchresult/components/sorting.js';
-import { renderFacetBreadcurm, handleClearMobileFilters } from '../../scripts/searchresult/components/facetBreadcrumb.js';
+import { courseCatalogSearchEngine } from '../../scripts/course-catalog/courseCatalogEngine.js';
+import renderCourseCatalogSearchBox from '../../scripts/course-catalog/components/renderCourseCatalogSearchBox.js';
+import renderCourseCatalogSearchResults from '../../scripts/course-catalog/components/renderCourseCatalogSearchResult.js';
+import renderCourseCatalogSorting from '../../scripts/course-catalog/components/courseCatalogSorting.js';
+import renderCourseCatalogQuerySummary from '../../scripts/course-catalog/components/courseCatalogQuerySummary.js';
+import renderCourseCatalogPagination from '../../scripts/course-catalog/components/courseCatalogPagination.js';
+import { renderCourseCatalogFacet, handleMobileFilters } from '../../scripts/course-catalog/components/courseCatalogFacet.js';
+import { renderCourceCatalogFacetBreadcurm, handleClearMobileFilters } from '../../scripts/course-catalog/components/courseCatalogFacetBreadcurm.js';
 
 export default async function decorate(block) {
   // Create main container div
-  const searchResultDiv = document.createElement('div');
-  searchResultDiv.classList.add('tw', 'search-result', 'tw-bg-white');
+  const courseCatalogDiv = document.createElement('div');
+  courseCatalogDiv.classList.add('tw', 'coursecatalog-search', 'tw-bg-white');
 
   // Create search wrapper div
   const searchWrapperDiv = document.createElement('div');
@@ -89,30 +86,6 @@ export default async function decorate(block) {
   mobileFilterFooter.append(mobileFilterFooterClearButton);
   mobileFilterFooter.append(mobileFilterFooterResultsButton);
 
-  // Create source facet div
-  const sourceFacetDiv = document.createElement('div');
-  sourceFacetDiv.id = 'source-facet';
-
-  // Create software facet div
-  const softwareFacetDiv = document.createElement('div');
-  softwareFacetDiv.id = 'software-facet';
-
-  // Create techniques facet div
-  const techniquesFacetDiv = document.createElement('div');
-  techniquesFacetDiv.id = 'techniques-facet';
-
-  // Create diagnostics facet div
-  const diagnosticsFacetDiv = document.createElement('div');
-  diagnosticsFacetDiv.id = 'diagnostics-facet';
-
-  // Create training facet div
-  const trainingFacetDiv = document.createElement('div');
-  trainingFacetDiv.id = 'training-facet';
-
-  // Create hplc facet div
-  const hplcFacetDiv = document.createElement('div');
-  hplcFacetDiv.id = 'hplc-facet';
-
   // Create source input box
   const sourceInput = document.createElement('input');
   sourceInput.type = 'text';
@@ -138,25 +111,6 @@ export default async function decorate(block) {
     'tw-bg-white',
   );
   sourceSuggestionBox.style.position = 'absolute';
-  // Create filetype facet div
-  const filetypeFacetDiv = document.createElement('div');
-  filetypeFacetDiv.id = 'filetype-facet';
-
-  // Create tags facet div
-  const tagsFacetDiv = document.createElement('div');
-  tagsFacetDiv.id = 'tags-facet';
-  // Create suggestion box
-  const tagSuggestionBox = document.createElement('div');
-  tagSuggestionBox.id = 'tag-suggestion-box';
-  tagSuggestionBox.classList.add(
-    'tw-hidden',
-    'tw-mt-2',
-    'tw-border',
-    'tw-border-gray-300',
-    'tw-rounded-md',
-    'tw-bg-white',
-  );
-  tagSuggestionBox.style.position = 'absolute';
 
   // Create search result section div
   const searchResultSectionDiv = document.createElement('div');
@@ -283,39 +237,39 @@ export default async function decorate(block) {
   coveoNoResultsDiv.style.display = 'none';
 
   // Create life sciences div
-  const lifeSciencesDiv = document.createElement('div');
-  lifeSciencesDiv.id = 'coveo-life-sciences';
-  const path = window.location.pathname;
-  const resp = await fetch(`${path}.plain.html`);
-  if (resp.ok) {
-    const html = await resp.text();
-    const main = document.createElement('main');
-    main.innerHTML = html;
-    const sections = main.querySelector('.searchresult').children;
-    block.textContent = '';
-    Array.from(sections).forEach((section, index) => {
-      const iteration = index + 1;
-      if (iteration === 1) {
-        lifeSciencesDiv.appendChild(section.querySelector('div'));
-        block.append(lifeSciencesDiv);
-      } else if (iteration === 2) {
-        if (main.querySelector('picture')) {
-          coveoNoResultsDiv.appendChild(main.querySelector('picture'));
-        }
-      } else if (iteration === 3) {
-        const noResultsText1 = section.querySelector('div');
-        noResultsText1.id = 'noresults-text1';
-        noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
-        noResultsText.appendChild(noResultsText1);
-        coveoNoResultsDiv.appendChild(noResultsText);
-      } else if (iteration === 4) {
-        const noResultsText2 = section.querySelector('div');
-        noResultsText2.classList = 'noresults-text2';
-        noResultsText.appendChild(noResultsText2);
-        coveoNoResultsDiv.appendChild(noResultsText);
-      }
-    });
-  }
+  // const lifeSciencesDiv = document.createElement('div');
+  // lifeSciencesDiv.id = 'coveo-life-sciences';
+  // const path = window.location.pathname;
+  // const resp = await fetch(`${path}.plain.html`);
+  // if (resp.ok) {
+  //   const html = await resp.text();
+  //   const main = document.createElement('main');
+  //   main.innerHTML = html;
+  //   const sections = main.querySelector('.coursecatalog-search').children;
+  //   block.textContent = '';
+  //   Array.from(sections).forEach((section, index) => {
+  //     const iteration = index + 1;
+  //     if (iteration === 1) {
+  //       lifeSciencesDiv.appendChild(section.querySelector('div'));
+  //       block.append(lifeSciencesDiv);
+  //     } else if (iteration === 2) {
+  //       if (main.querySelector('picture')) {
+  //         coveoNoResultsDiv.appendChild(main.querySelector('picture'));
+  //       }
+  //     } else if (iteration === 3) {
+  //       const noResultsText1 = section.querySelector('div');
+  //       noResultsText1.id = 'noresults-text1';
+  //       noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
+  //       noResultsText.appendChild(noResultsText1);
+  //       coveoNoResultsDiv.appendChild(noResultsText);
+  //     } else if (iteration === 4) {
+  //       const noResultsText2 = section.querySelector('div');
+  //       noResultsText2.classList = 'noresults-text2';
+  //       noResultsText.appendChild(noResultsText2);
+  //       coveoNoResultsDiv.appendChild(noResultsText);
+  //     }
+  //   });
+  // }
 
   // Create pagination div
   const paginationDiv = document.createElement('div');
@@ -345,30 +299,29 @@ export default async function decorate(block) {
   searchWrapperDiv.appendChild(searchResultSectionDiv);
 
   // Append search wrapper to main container
-  searchResultDiv.appendChild(searchWrapperDiv);
+  courseCatalogDiv.appendChild(searchWrapperDiv);
 
   // Append the main search result div to the body or any specific container
-  block.append(searchResultDiv);
+  block.append(courseCatalogDiv);
 
-  // Create suggestion popup divgit 
-  
+  // Create suggestion popup div
   const suggestionPopupDiv = document.createElement('div');
   suggestionPopupDiv.id = 'suggestion-popup';
 
   document.body.appendChild(suggestionPopupDiv);
 
   try {
-    renderSearchBox();
-    renderSorting();
-    searchEngine.executeFirstSearch();
-    searchEngine.subscribe(() => {
-      renderSearchResults();
-      renderQuerySummary();
-      renderPagination();
-      callCreateFacet();
-      renderFacetBreadcurm();
+    renderCourseCatalogSearchBox();
+    renderCourseCatalogSorting();
+    courseCatalogSearchEngine.executeFirstSearch();
+    courseCatalogSearchEngine.subscribe(() => {
+      renderCourseCatalogSearchResults();
+      renderCourseCatalogQuerySummary();
+      renderCourseCatalogPagination();
+      renderCourseCatalogFacet();
+      renderCourceCatalogFacetBreadcurm();
     });
   } catch (error) {
-    searchEngine.executeFirstSearch();
+    courseCatalogSearchEngine.executeFirstSearch();
   }
 }

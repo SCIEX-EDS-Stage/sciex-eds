@@ -1,7 +1,6 @@
-import { searchBoxController, headlessResultsList } from '../controller/controllers.js';
-import { getCookie } from '../../scripts.js';
+import { courseCatalogSearchBoxController } from '../course-catalog-controller/controllers.js';
 
-const renderSearchBox = () => {
+const renderCourseCatalogSearchBox = () => {
   const queryInput = document.getElementById('coveo-query');
   const suggestionPopup = document.getElementById('suggestion-popup');
   const coveoResults = document.getElementById('coveo-results');
@@ -14,7 +13,7 @@ const renderSearchBox = () => {
 
   const showSuggestions = () => {
     const searchBox = document.getElementById('coveo-query');
-    const suggestions = searchBoxController.state.suggestions || [];
+    const suggestions = courseCatalogSearchBoxController.state.suggestions || [];
 
     const rect = searchBox.getBoundingClientRect();
     suggestionPopup.style.top = `${rect.bottom + window.scrollY}px`;
@@ -45,45 +44,30 @@ const renderSearchBox = () => {
     sessionStorage.removeItem('focusedElement');
     const query = event.target.value;
     if (query.length > 0) {
-      searchBoxController.updateText(query);
-      searchBoxController.showSuggestions();
+      courseCatalogSearchBoxController.updateText(query);
+      courseCatalogSearchBoxController.showSuggestions();
       showSuggestions();
       clearSearch.style.display = 'block';
     } else {
-      searchBoxController.updateText('');
+      courseCatalogSearchBoxController.updateText('');
       suggestionPopup.style.display = 'none';
       clearSearch.style.display = 'none';
     }
   });
 
   queryInput.addEventListener('input', () => {
-    if (searchBoxController.state.value === '') {
-      searchBoxController.clear();
-      searchBoxController.submit();
+    if (courseCatalogSearchBoxController.state.value === '') {
+      courseCatalogSearchBoxController.clear();
+      courseCatalogSearchBoxController.submit();
     }
   });
-
-  function setSearchSurveyCookie() {
-    const searchcookieValue = getCookie('searchSurvey');
-    if (searchcookieValue !== 'visited') {
-      // var showSearchSurvey = "true";
-      const d = new Date();
-      d.setTime(d.getTime() + (6 * 60 * 60 * 1000));
-      const expires = `expires=${d.toUTCString()}`;
-      document.cookie = `searchSurvey=visited;secure=true;path=/;${expires}`;
-    }
-  }
 
   queryInput.addEventListener('keydown', (event) => {
     searchTermValue.innerHTML = '';
     searchTermValue.innerHTML = event.target.value;
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
       searchTermContainer.style.display = 'block';
-      searchBoxController.submit();
-      if (headlessResultsList.state && headlessResultsList.state.results
-           && headlessResultsList.state.results.length > 0) {
-        setSearchSurveyCookie();
-      }
+      courseCatalogSearchBoxController.submit();
       showResults();
     }
     if (event.key === 'Backspace') {
@@ -100,9 +84,9 @@ const renderSearchBox = () => {
   clearSearch.addEventListener('click', () => {
     queryInput.value = '';
     searchTermContainer.style.display = 'none';
-    searchBoxController.clear();
-    searchBoxController.submit();
+    courseCatalogSearchBoxController.clear();
+    courseCatalogSearchBoxController.submit();
     clearSearch.style.display = 'none';
   });
 };
-export default renderSearchBox;
+export default renderCourseCatalogSearchBox;
