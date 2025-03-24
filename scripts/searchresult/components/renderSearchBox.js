@@ -11,7 +11,7 @@ const renderSearchBox = () => {
   searchTermContainer.style.display = 'none';
   clearSearch.style.display = 'none';
   suggestionPopup.style.display = 'none';
-  let showSearchSurvey = 'false'; // eslint-disable-line no-unused-vars
+  var showSearchSurvey = 'false'; // eslint-disable-line no-unused-vars
 
   const showSuggestions = () => {
     const searchBox = document.getElementById('coveo-query');

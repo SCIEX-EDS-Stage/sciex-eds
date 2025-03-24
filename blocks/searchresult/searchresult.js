@@ -350,8 +350,8 @@ export default async function decorate(block) {
   // Append the main search result div to the body or any specific container
   block.append(searchResultDiv);
 
-  // Create suggestion popup divgit 
-  
+  // Create suggestion popup divgit
+
   const suggestionPopupDiv = document.createElement('div');
   suggestionPopupDiv.id = 'suggestion-popup';
 
