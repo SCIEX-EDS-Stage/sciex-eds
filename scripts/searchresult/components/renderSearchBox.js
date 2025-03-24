@@ -11,7 +11,6 @@ const renderSearchBox = () => {
   searchTermContainer.style.display = 'none';
   clearSearch.style.display = 'none';
   suggestionPopup.style.display = 'none';
-  var showSearchSurvey = 'false'; // eslint-disable-line no-unused-vars
 
   const showSuggestions = () => {
     const searchBox = document.getElementById('coveo-query');
@@ -67,7 +66,7 @@ const renderSearchBox = () => {
   function setSearchSurveyCookie() {
     const searchcookieValue = getCookie('searchSurvey');
     if (searchcookieValue !== 'visited') {
-      showSearchSurvey = 'true'; // eslint-disable-line no-unused-vars
+      window.showSearchSurvey = 'true'; // eslint-disable-line no-unused-vars
       const d = new Date();
       d.setTime(d.getTime() + (6 * 60 * 60 * 1000));
       const expires = `expires=${d.toUTCString()}`;
