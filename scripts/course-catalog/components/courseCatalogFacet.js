@@ -311,7 +311,6 @@ function createFacetRender(facetController, facetElementId, headerText) {
   }
   const id = `${facetElementId}-facet`;
   const ele = document.getElementById(id);
-  console.log('ele', ele);
   if (ele !== null && !isValues) {
     ele.remove();
   }
@@ -380,7 +379,6 @@ export function renderCourseCatalogFacet() {
 
   for (const item in facetsId) {
     const val = facetController.get(item);
-    console.log('val', val);
     if (val.state.values.length) {
       createFacetRender(val, item, facetsId[item]);
     }
