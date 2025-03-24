@@ -74,7 +74,7 @@ const renderCourseCatalogSearchResults = () => {
 
       const courseInfo = document.createElement('div');
       courseInfo.className = 'course-info';
-      courseInfo.innerHTML = 'Duration : 1 day | Language : German | Type : at SCIEX | Course Level : Intermediate | Rating : ';
+      courseInfo.innerHTML = `Duration : ${result.raw.duration || '1 day'} | Language : ${result.raw.language || 'German'} | Type : at SCIEX | Course Level : Intermediate | Rating : `;
 
       const ratingContainer = document.createElement('span');
       ratingContainer.className = 'rating';
@@ -96,7 +96,6 @@ const renderCourseCatalogSearchResults = () => {
         <div class="item-details"> 
           <div class="tag-container">
             <span class="tag new">New</span>
-            <span class="tag course">Course</span>
           </div>
           <h3>${result.title || 'No Title Available'}</h3>
           ${descriptionHtml}

@@ -29,7 +29,7 @@ export const courseCatalogSearchBoxController = buildSearchBox(courseCatalogSear
 
 export const courseCatalogResultsList = buildResultList(courseCatalogSearchEngine, {
   options: {
-    fieldsToInclude: ['ogimage', 'description'],
+    fieldsToInclude: ['ogimage', 'description', 'duration', 'level', 'type'],
   },
 });
 
