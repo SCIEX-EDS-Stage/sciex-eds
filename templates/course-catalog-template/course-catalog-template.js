@@ -10,7 +10,7 @@ export default async function buildAutoBlocks() {
   }
   const courseCatalogDiv = section.querySelector('div. coursecatalog-search');
   if (courseCatalogDiv) {
-    const courseCatalogBlock = buildBlock('coursecatalog-search', { elems: [] });
+    const courseCatalogBlock = buildBlock('coursecatalog', { elems: [] });
     section.append(courseCatalogBlock);
   }
   const footerDiv = section.querySelector('div.footer');
