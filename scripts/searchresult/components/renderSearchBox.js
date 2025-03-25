@@ -99,7 +99,7 @@ const renderSearchBox = () => {
       searchBoxController.submit();
       if (headlessResultsList.state && headlessResultsList.state.results
            && headlessResultsList.state.results.length > 0) {
-        const enableSiteInterceptScript = getMetadata('enableSiteInterceptScript');
+        const enableSiteInterceptScript = getMetadata('enablesiteinterceptscript');
         if (enableSiteInterceptScript && enableSiteInterceptScript === 'true') {
           setSearchSurveyCookie();
           qualtricsFeedback();
