@@ -1,0 +1,25 @@
+.featured-products {
+    font-family: "Geogrotesque", Helvetica, Arial, sans-serif;
+    margin-top: 50px;
+   
+}
+
+.featured-products h2 {
+    font-size: 32px;  /* Adjust based on Figma */
+    margin-bottom: 16px;
+    font-weight: normal;
+}
+
+
+
+.featured-products li {
+    margin-bottom: 8px; /* Space between links */
+}
+
+.featured-products a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #0056b3;
+    text-decoration: underline;  
+}
+
