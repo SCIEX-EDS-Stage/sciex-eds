@@ -242,7 +242,7 @@ export default async function decorate(block) {
   const path = window.location.pathname;
   const resp = await fetch(`${path}.plain.html`);
   const html = await resp.text();
-  console.log("resp", html);
+  console.log('resp', html);
   // if (resp.ok) {
   //   const html = await resp.text();
   //   const main = document.createElement('main');
