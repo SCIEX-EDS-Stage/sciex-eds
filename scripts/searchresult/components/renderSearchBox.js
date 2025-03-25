@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { searchBoxController, headlessResultsList } from '../controller/controllers.js';
 import { getCookie } from '../../scripts.js';
+import { getMetadata } from '../../aem.js';
 
 const renderSearchBox = () => {
   const queryInput = document.getElementById('coveo-query');
