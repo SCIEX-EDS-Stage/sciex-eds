@@ -368,7 +368,6 @@ export function renderCourseCatalogFacet() {
     trainingtypecategories: 'Training type',
     levelcategories: 'Training Level',
     certificatetypecategories: 'Certificate type',
-    language: 'Language',
     massspectrometerscategories: 'Mass spectrometry',
     hplcandceproductscategories: 'Liquid chromoatography',
     integratedsolutionscategories: 'Integrated solutions',
@@ -396,7 +395,6 @@ export function renderCourseCatalogFacet() {
     'scategories-facet',
     'integratedsolutionscategories-facet',
     'softwarecategories-facet',
-    'language-facet',
   ];
   orderFacetChildren('facets', desiredOrder);
 }

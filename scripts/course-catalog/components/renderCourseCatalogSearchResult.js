@@ -67,16 +67,16 @@ const renderCourseCatalogSearchResults = () => {
 
       let descriptionHtml = '';
       if (result.raw.description) {
-        descriptionHtml = `<p class="description">${result.raw.description}</p>`;
+        descriptionHtml = `${result.raw.description}`;
       } else {
-        descriptionHtml = `<p class="description">${result.Excerpt}</p>`;
+        descriptionHtml = `${result.Excerpt}`;
       }
 
       const courseInfo = document.createElement('div');
       courseInfo.className = 'course-info';
-      let duration = result.raw.duration ? `Duration : ${result.raw.duration}` : '';
-      let language = result.raw.language ? `Language : ${result.raw.language}` : '';
-      courseInfo.innerHTML = `${duration} | ${language} | Type : at SCIEX | Course Level : Intermediate | Rating : `;
+      let duration = result.raw.duration ? `Duration : ${result.raw.duration} |` : '';
+      let language = result.raw.language ? `Language : ${result.raw.language} |` : '';
+      courseInfo.innerHTML = `${duration} ${language}  Type : at SCIEX | Course Level : Intermediate | Rating : `;
 
       const ratingContainer = document.createElement('span');
       ratingContainer.className = 'rating';
@@ -100,7 +100,7 @@ const renderCourseCatalogSearchResults = () => {
             <span class="tag new">New</span>
           </div>
           <h3>${result.title || 'No Title Available'}</h3>
-          ${descriptionHtml}
+          <div class="description"> ${descriptionHtml} </div>
           ${
   result.raw.ogimage
     ? `<img src="${result.raw.ogimage}" alt="ogimage" width="200" height="200">`

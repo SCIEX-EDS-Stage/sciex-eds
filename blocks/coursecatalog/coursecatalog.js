@@ -237,10 +237,12 @@ export default async function decorate(block) {
   coveoNoResultsDiv.style.display = 'none';
 
   // Create life sciences div
-  // const lifeSciencesDiv = document.createElement('div');
-  // lifeSciencesDiv.id = 'coveo-life-sciences';
-  // const path = window.location.pathname;
-  // const resp = await fetch(`${path}.plain.html`);
+  const lifeSciencesDiv = document.createElement('div');
+  lifeSciencesDiv.id = 'coveo-life-sciences';
+  const path = window.location.pathname;
+  const resp = await fetch(`${path}.plain.html`);
+  const html = await resp.text();
+  console.log('resp', html);
   // if (resp.ok) {
   //   const html = await resp.text();
   //   const main = document.createElement('main');

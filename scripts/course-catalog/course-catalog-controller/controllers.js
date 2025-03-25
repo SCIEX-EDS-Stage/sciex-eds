@@ -66,7 +66,6 @@ function createFacetController() {
     'trainingtypecategories',
     'levelcategories',
     'certificatetypecategories',
-    'language',
     'massspectrometerscategories',
     'hplcandceproductscategories',
     'integratedsolutionscategories',
