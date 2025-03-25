@@ -1278,6 +1278,7 @@ export default async function decorate(block) {
       email: userData.email,
       key: userData.userKey,
     };
+    sessionStorage.setItem('loggedin-status', userData.loggedIn);
     sessionStorage.setItem('eloquaData', JSON.stringify(eloquaData));
     document.getElementById('view-profile').style.display = '';
     document.getElementById('logout').style.display = '';
