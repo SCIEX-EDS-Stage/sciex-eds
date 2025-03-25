@@ -16,7 +16,18 @@
         }
       }
     ],
-    "models": [],
+    "models": [{
+      "id": "featured-products",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        }
+      ]
+    }],
     "filters": []
   }
   
