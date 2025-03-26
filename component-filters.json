@@ -24,7 +24,11 @@
       "login-sso",
       "breadcrumb",
       "coursecatalog",
-      "featured-products"
+      "featured-products",
+      "related-resources",
+      "tabs-nav",
+      "button-text",
+      "title"
     ]
   },
   {
@@ -62,6 +66,11 @@
       "image",
       "icon",
       "links"
+    ]
+  },{
+    "id": "tabs-nav",
+    "components": [
+      "tab"
     ]
   }
 ]

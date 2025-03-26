@@ -100,6 +100,7 @@ export function decorateMain(main) {
 }
 const TEMPLATE_LIST = [
   'course-catalog-template',
+  'tech-notes-template',
 ];
 
 async function decorateTemplates(main) {
