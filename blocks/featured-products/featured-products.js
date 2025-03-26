@@ -1,6 +1,7 @@
 import { getCookie } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
+  const picture = block.querySelector('picture');
   const path = window.location.pathname;
   let response;
   try {
@@ -13,14 +14,6 @@ export default async function decorate(block) {
 
     const data = await response.json();
     block.textContent = '';
-    const resp = await fetch(`${path}.plain.html`);
-    let picture = null;
-    if (resp.ok) {
-      const html = await resp.text();
-      const imageDiv = document.createElement('imageDiv');
-      imageDiv.innerHTML = html;
-      picture = imageDiv.querySelector('picture');
-    }
 
     block.classList.add('featured-products');
     const dynamicElement = document.createElement('div');
@@ -49,4 +42,5 @@ export default async function decorate(block) {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+  
 }
