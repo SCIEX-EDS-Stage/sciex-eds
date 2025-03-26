@@ -1,6 +1,8 @@
 .featured-products {
     font-family: "Geogrotesque", Helvetica, Arial, sans-serif;
     margin-top: 50px;
+    display: flex;
+    gap: 35rem;
    
 }
 
