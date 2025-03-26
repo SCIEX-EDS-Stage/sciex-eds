@@ -14,8 +14,7 @@ export default async function decorate(block) {
 
     const data = await response.json();
     block.textContent = '';
-    const resp = await fetch(`${path}.plain.html`);
-   
+
     block.classList.add('featured-products');
     const dynamicElement = document.createElement('div');
     const title = document.createElement('h2');
