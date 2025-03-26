@@ -1,12 +1,18 @@
+import { getCookie } from '../../scripts/scripts.js';
+
 export default async function decorate(block) {
-  const currentUrl = window.location.href;
-  const relativePath = currentUrl.split('/').slice(3).join('/');
+  const path = window.location.pathname;
+  let response;
   try {
-    const response = await fetch(`/bin/sciex/tags?pagePath=${relativePath}`);
+    if (getCookie('cq-authoring-mode') !== 'TOUCH') {
+      const trimmedPath = path.replace(/\.html$/, '');
+      response = await fetch(`/bin/sciex/tags?pagePath=/${trimmedPath}`);
+    } else {
+      response = await fetch(`/bin/sciex/tags?pagePath=/content/sciex-eds${path}`);
+    }
 
     const data = await response.json();
     block.textContent = '';
-    const path = window.location.pathname;
     const resp = await fetch(`${path}.plain.html`);
     let picture = null;
     if (resp.ok) {
