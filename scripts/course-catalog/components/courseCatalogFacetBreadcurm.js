@@ -126,7 +126,7 @@ export const renderCourceCatalogFacetBreadcurm = () => {
       const gridItem1 = document.createElement('div');
       gridItem1.classList.add('grid-item');
       const box1 = document.createElement('div');
-      box1.textContent = `${fieldName || ''} : ${item.value.value}`;
+      box1.textContent = fieldName ? `${fieldName} : ${item.value.value}` : `${item.value.value}`;
       gridItem1.appendChild(box1);
 
       const gridItem2 = document.createElement('div');

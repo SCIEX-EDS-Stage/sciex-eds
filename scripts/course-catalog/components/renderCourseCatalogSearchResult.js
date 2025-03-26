@@ -74,9 +74,11 @@ const renderCourseCatalogSearchResults = () => {
 
       const courseInfo = document.createElement('div');
       courseInfo.className = 'course-info';
-      let duration = result.raw.duration ? `Duration : ${result.raw.duration} |` : '';
-      let language = result.raw.language ? `Language : ${result.raw.language} |` : '';
-      courseInfo.innerHTML = `${duration} ${language}  Type : at SCIEX | Course Level : Intermediate | Rating : `;
+      let duration = result.raw.duration ? `Duration : ${result.raw.duration} | ` : '';
+      let language = result.raw.language ? `Language : ${result.raw.language} | ` : '';
+      let courseType = result.raw.coursetypecategories ? `Type : ${result.raw.coursetypecategories} | ` : '';
+      let courseLevel = result.raw.levelcategories ? `Course Level : ${result.raw.levelcategories} | ` : '';
+      courseInfo.innerHTML = `${duration}  ${language}  ${courseType}  ${courseLevel}  Rating : `;
 
       const ratingContainer = document.createElement('span');
       ratingContainer.className = 'rating';
@@ -94,11 +96,14 @@ const renderCourseCatalogSearchResults = () => {
 
       Array.from(stars).slice(0, result.rating).forEach((star) => star.classList.add('filled'));
 
+      // <span class="tag premium">Premium</span>
       const resultMarkup = `
         <div class="item-details"> 
-          <div class="tag-container">
-            <span class="tag new">New</span>
-          </div>
+          ${ result.raw.isnewcourse ?  
+            `<div class="tag-container">
+              ${ result.raw.isnewcourse ? `<span class="tag new">New</span>` : ''}
+            </div> ` : ''
+          }
           <h3>${result.title || 'No Title Available'}</h3>
           <div class="description"> ${descriptionHtml} </div>
           ${

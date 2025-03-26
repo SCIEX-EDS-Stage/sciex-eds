@@ -241,37 +241,35 @@ export default async function decorate(block) {
   lifeSciencesDiv.id = 'coveo-life-sciences';
   const path = window.location.pathname;
   const resp = await fetch(`${path}.plain.html`);
-  const html = await resp.text();
-  console.log('resp', html);
-  // if (resp.ok) {
-  //   const html = await resp.text();
-  //   const main = document.createElement('main');
-  //   main.innerHTML = html;
-  //   const sections = main.querySelector('.coursecatalog-search').children;
-  //   block.textContent = '';
-  //   Array.from(sections).forEach((section, index) => {
-  //     const iteration = index + 1;
-  //     if (iteration === 1) {
-  //       lifeSciencesDiv.appendChild(section.querySelector('div'));
-  //       block.append(lifeSciencesDiv);
-  //     } else if (iteration === 2) {
-  //       if (main.querySelector('picture')) {
-  //         coveoNoResultsDiv.appendChild(main.querySelector('picture'));
-  //       }
-  //     } else if (iteration === 3) {
-  //       const noResultsText1 = section.querySelector('div');
-  //       noResultsText1.id = 'noresults-text1';
-  //       noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
-  //       noResultsText.appendChild(noResultsText1);
-  //       coveoNoResultsDiv.appendChild(noResultsText);
-  //     } else if (iteration === 4) {
-  //       const noResultsText2 = section.querySelector('div');
-  //       noResultsText2.classList = 'noresults-text2';
-  //       noResultsText.appendChild(noResultsText2);
-  //       coveoNoResultsDiv.appendChild(noResultsText);
-  //     }
-  //   });
-  // }
+  if (resp.ok) {
+    const html = await resp.text();
+    const main = document.createElement('main');
+    main.innerHTML = html;
+    const sections = main.querySelector('.coursecatalog').children;
+    block.textContent = '';
+    Array.from(sections).forEach((section, index) => {
+      const iteration = index + 1;
+      if (iteration === 1) {
+        lifeSciencesDiv.appendChild(section.querySelector('div'));
+        // block.append(lifeSciencesDiv);
+      } else if (iteration === 2) {
+        if (main.querySelector('picture')) {
+          coveoNoResultsDiv.appendChild(main.querySelector('picture'));
+        }
+      } else if (iteration === 3) {
+        const noResultsText1 = section.querySelector('div');
+        noResultsText1.id = 'noresults-text1';
+        noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
+        noResultsText.appendChild(noResultsText1);
+        coveoNoResultsDiv.appendChild(noResultsText);
+      } else if (iteration === 4) {
+        const noResultsText2 = section.querySelector('div');
+        noResultsText2.classList = 'noresults-text2';
+        noResultsText.appendChild(noResultsText2);
+        coveoNoResultsDiv.appendChild(noResultsText);
+      }
+    });
+  }
 
   // Create pagination div
   const paginationDiv = document.createElement('div');

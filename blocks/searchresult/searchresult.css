@@ -529,14 +529,16 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
+}
+.suggestion-item svg {
+    margin-right: 10px;
 }
 
 #suggestion-popup {
     position: absolute;
     top: 296px;
     left: 488px;
-    width: 63%;
+    width: 61%;
     max-height: 200px;
     overflow-y: auto;
     z-index: 10;
