@@ -4,7 +4,7 @@ export default async function decorate(block) {
   const path = window.location.pathname;
   let response;
   try {
-    if (getCookie('cq-authoring-mode') !== 'TOUCH') {
+    if (getCookie('cq-authoring-mode') === 'TOUCH') {
       const trimmedPath = path.replace(/\.html$/, '');
       response = await fetch(`/bin/sciex/tags?pagePath=/${trimmedPath}`);
     } else {
