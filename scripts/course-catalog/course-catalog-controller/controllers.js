@@ -8,6 +8,7 @@ import {
   buildSort,
   buildInteractiveResult,
   buildBreadcrumbManager,
+  buildContext
 } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
 import { courseCatalogSearchEngine }  from '../courseCatalogEngine.js';
 
@@ -54,6 +55,10 @@ export const courseCatalogQuerySummary = buildQuerySummary(courseCatalogSearchEn
 export const courseCatlogPaginationController = buildPager(courseCatalogSearchEngine);
 
 export const courseCatalogFacetBreadcrumb = buildBreadcrumbManager(courseCatalogSearchEngine)
+
+// Context variable controller
+const context = buildContext(courseCatalogSearchEngine)
+context.add('host', window.location.origin);
 
 export const allFacetController = createFacetController();
 
