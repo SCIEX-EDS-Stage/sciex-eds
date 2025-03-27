@@ -374,6 +374,7 @@ export function renderCourseCatalogFacet() {
     softwarecategories: 'Software',
     location: 'Training location',
     capillaryelectrophoresiscategories: 'Capillary electrophoresis',
+    language : 'Language'
   };
 
   for (const item in facetsId) {
@@ -395,6 +396,7 @@ export function renderCourseCatalogFacet() {
     'scategories-facet',
     'integratedsolutionscategories-facet',
     'softwarecategories-facet',
+    'language-facet',
   ];
   orderFacetChildren('facets', desiredOrder);
 }

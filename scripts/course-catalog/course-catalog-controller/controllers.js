@@ -7,7 +7,8 @@ import {
   buildQuerySummary,
   buildSort,
   buildInteractiveResult,
-  buildBreadcrumbManager
+  buildBreadcrumbManager,
+  buildContext
 } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
 import { courseCatalogSearchEngine }  from '../courseCatalogEngine.js';
 
@@ -29,7 +30,7 @@ export const courseCatalogSearchBoxController = buildSearchBox(courseCatalogSear
 
 export const courseCatalogResultsList = buildResultList(courseCatalogSearchEngine, {
   options: {
-    fieldsToInclude: ['ogimage', 'description', 'duration', 'level', 'type'],
+    fieldsToInclude: ['description', 'duration', 'levelcategories', 'coursetypecategories', 'isnewcourse'],
   },
 });
 
@@ -55,6 +56,10 @@ export const courseCatlogPaginationController = buildPager(courseCatalogSearchEn
 
 export const courseCatalogFacetBreadcrumb = buildBreadcrumbManager(courseCatalogSearchEngine)
 
+// Context variable controller
+const context = buildContext(courseCatalogSearchEngine)
+context.add('host', window.location.origin);
+
 export const allFacetController = createFacetController();
 
 function createFacetController() {
@@ -71,7 +76,8 @@ function createFacetController() {
     'integratedsolutionscategories',
     'softwarecategories',
     'location',
-    'capillaryelectrophoresiscategories'
+    'capillaryelectrophoresiscategories',
+    'language',
   ];
   const controllerMap = new Map();
   facetsId.forEach((item) => {
