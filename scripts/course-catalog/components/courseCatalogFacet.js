@@ -362,7 +362,7 @@ export function renderCourseCatalogFacet() {
   const facetController = allFacetController;
   const facetsId = {
     isnewcourse: '',
-    coursetypecategories: 'Course type (tile filter)',
+    coursetypecategories: 'Course type',
     trainingtopiccategories: 'Training topic',
     techniquescategories: 'Training Techniques',
     trainingtypecategories: 'Training type',
