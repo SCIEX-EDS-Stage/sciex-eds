@@ -7,12 +7,17 @@
 }
 
 .featured-products h2 {
-    font-size: 32px;  /* Adjust based on Figma */
-    margin-bottom: 16px;
-    font-weight: normal;
+    color: var(--Neutrals-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 80px;
 }
 
-
+.featured-products img {
+    margin-top: 0; /* Default, will be overridden for mobile */
+}
 
 .featured-products li {
     margin-bottom: 8px; /* Space between links */
@@ -25,3 +30,20 @@
     text-decoration: underline;  
 }
 
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .featured-products {
+        margin-top: 50px;
+        gap: 0; 
+        display: block; 
+    }
+
+    .featured-products h2 {
+        font-size: 30px;
+    }
+
+    .featured-products img {
+        margin-top: 30px;
+        width: 70%;
+    }
+}
