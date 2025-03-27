@@ -23,12 +23,7 @@
       "searchresult",
       "login-sso",
       "breadcrumb",
-      "coursecatalog",
-      "featured-products",
-      "related-resources",
-      "tabs-nav",
-      "button-text",
-      "title"
+      "featured-products"
     ]
   },
   {
@@ -66,11 +61,6 @@
       "image",
       "icon",
       "links"
-    ]
-  },{
-    "id": "tabs-nav",
-    "components": [
-      "tab"
     ]
   }
 ]
