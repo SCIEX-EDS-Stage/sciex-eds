@@ -42,5 +42,4 @@ export default async function decorate(block) {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-  
 }
