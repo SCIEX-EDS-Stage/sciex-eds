@@ -5,6 +5,6 @@
     "/content/sciex-eds/metadata:/metadata.json"
   ],
   "includes": [
-   
+    "/content/sciex-eds/"
   ]
 }
