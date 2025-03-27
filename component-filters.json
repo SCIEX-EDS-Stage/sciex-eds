@@ -23,7 +23,12 @@
       "searchresult",
       "login-sso",
       "breadcrumb",
-      "featured-products"
+      "featured-products",
+      "coursecatalog",
+      "tab-nav",
+      "related-resources",
+      "button-text",
+      "title"
     ]
   },
   {
@@ -54,6 +59,12 @@
     ]
   },
   {
+    "id": "related-resources",
+    "components": [
+      "resource"
+    ]
+  },
+  {
     "id": "sciex-footer",
     "components": [
       "title",
@@ -61,6 +72,12 @@
       "image",
       "icon",
       "links"
+    ]
+  },
+  {
+    "id": "tabs-nav",
+    "components": [
+      "tab"
     ]
   }
 ]
