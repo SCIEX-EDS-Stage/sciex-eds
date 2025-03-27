@@ -34,6 +34,9 @@ const renderCourseCatalogSorting = () => {
     { label: 'Title', criterion: { by: 'field', field: 'title' } },
     { label: 'Date', criterion: { by: 'indexeddate', field: 'indexeddate' } },
   ];
+  const sortLabel = document.createElement('div');
+  sortLabel.innerHTML = 'Sort By:';
+  sortLabel.className = 'sort-by-label';
   const selectElement = document.createElement('select');
   selectElement.id = 'sort-element';
   selectElement.className = 'tw-py-2 tw-px-3 tw-border tw-border-gray-300 tw-bg-white tw-text-sm';
@@ -49,6 +52,7 @@ const renderCourseCatalogSorting = () => {
     // const sortedData = sortCondition.sortBy(selectedCriterion);
     renderCourseCatalogSearchResults();
   });
+  sortElement.appendChild(sortLabel);
   sortElement.appendChild(selectElement);
 };
 export default renderCourseCatalogSorting;
