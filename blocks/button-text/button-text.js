@@ -1,4 +1,5 @@
-import {} from '../../scripts/aem.js';
+import { span } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   const blockDiv = document.createElement('div');
@@ -18,8 +19,14 @@ export default async function decorate(block) {
     }
 
     const button = document.createElement('button');
-    button.innerHTML = `${buttonText} <span class="arrow">→</span>`;
     button.classList.add('custom-button');
+
+    // Create arrow icon
+    const arrowIcon = span({ class: 'icon icon-Arrow' });
+
+    // Append text and arrow to button
+    button.appendChild(document.createTextNode(buttonText));
+    button.appendChild(arrowIcon);
 
     button.addEventListener('click', (event) => {
       event.preventDefault();
@@ -33,7 +40,7 @@ export default async function decorate(block) {
     wrapperAnchor.rel = 'noopener noreferrer';
     wrapperAnchor.classList.add('button-link');
     wrapperAnchor.appendChild(button);
-
+    decorateIcons(wrapperAnchor);
     blockDiv.appendChild(wrapperAnchor);
   }
 
