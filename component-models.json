@@ -364,6 +364,23 @@
         "value": "",
         "label": "Coveo Search Engine Access Token",
         "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "buttonText",
+        "label": "Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "buttonUrl",
+        "label": "Button URL"
       }
     ]
   },
@@ -643,10 +660,87 @@
     "fields": [
       {
         "component": "text",
-        "name": "text",
+        "name": "tabName",
         "value": "",
-        "label": "Text",
+        "label": "Tab Name",
         "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "technoteCaption",
+        "label": "Tech Notes Caption"
+      },
+      {
+        "component": "select",
+        "name": "backgroundColour",
+        "label": "Background Colour",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "No Color",
+            "value": "######"
+          },
+          {
+            "name": "White",
+            "value": "#ffffff"
+          },
+          {
+            "name": "Silver",
+            "value": "#C0C0C0"
+          },
+          {
+            "name": "White Smoke",
+            "value": "#efefef"
+          },
+          {
+            "name": "Pattens Blue",
+            "value": "#e5ecee"
+          },
+          {
+            "name": "Sherpa Blue",
+            "value": "#003E52"
+          },
+          {
+            "name": "Cerulean",
+            "value": "#007DA4"
+          },
+          {
+            "name": "Approx Pattens Blue",
+            "value": "#e4f1f5"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "imageJustification",
+        "label": "Image Justification",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Image-right",
+            "value": "image-right"
+          },
+          {
+            "name": "Image-left",
+            "value": "image-left"
+          },
+          {
+            "name": "Image-top",
+            "value": "image-top"
+          },
+          {
+            "name": "Image-bottom",
+            "value": "image-bottom"
+          }
+        ]
       }
     ]
   },

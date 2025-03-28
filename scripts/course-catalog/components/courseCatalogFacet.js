@@ -362,7 +362,7 @@ export function renderCourseCatalogFacet() {
   const facetController = allFacetController;
   const facetsId = {
     isnewcourse: '',
-    coursetypecategories: 'Course type (tile filter)',
+    coursetypecategories: 'Course type',
     trainingtopiccategories: 'Training topic',
     techniquescategories: 'Training Techniques',
     trainingtypecategories: 'Training type',
@@ -372,7 +372,7 @@ export function renderCourseCatalogFacet() {
     hplcandceproductscategories: 'Liquid chromoatography',
     integratedsolutionscategories: 'Integrated solutions',
     softwarecategories: 'Software',
-    location: 'Training location',
+    region: 'Training location',
     capillaryelectrophoresiscategories: 'Capillary electrophoresis',
     language : 'Language'
   };
@@ -391,6 +391,7 @@ export function renderCourseCatalogFacet() {
     'techniquescategories-facet',
     'trainingtopiccategories-facet',
     'trainingtypecategories-facet',
+    'region-facet',
     'massspectrometerscategories-facet',
     'capillaryelectrophoresiscategories-facet',
     'scategories-facet',
