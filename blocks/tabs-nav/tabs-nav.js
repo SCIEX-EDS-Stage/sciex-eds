@@ -7,7 +7,6 @@ export default async function decorate(block) {
   [...block.children].forEach((row) => {
     console.log(`tabs Nav>>>>>>${row.firstElementChild}`);
   });
-
   block.textContent = '';
   block.append(blockDiv);
 }

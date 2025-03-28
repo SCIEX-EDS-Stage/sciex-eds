@@ -22,6 +22,10 @@ export const courseCatalogSearchEngine = buildSearchEngine({
     search: {
       searchHub: 'SCIEXCourseListing',
     },
+    analytics: {
+      analyticsMode: 'next',
+      trackingId: 'sciex_us'
+    },
   },
 });
 
