@@ -75,7 +75,7 @@ function createFacetController() {
     'hplcandceproductscategories',
     'integratedsolutionscategories',
     'softwarecategories',
-    'location',
+    'region',
     'capillaryelectrophoresiscategories',
     'language',
   ];
