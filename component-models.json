@@ -682,10 +682,29 @@
         "valueType": "string"
       },
       {
+        "component": "text",
+        "name": "tabId",
+        "value": "",
+        "label": "Tab Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "technote",
+    "fields": [
+      {
+        "component": "text",
+        "name": "tabId",
+        "value": "",
+        "label": "Tab Id",
+        "valueType": "string"
+      },
+      {
         "component": "reference",
         "valueType": "string",
-        "name": "icon",
-        "label": "Icon",
+        "name": "image",
+        "label": "Image",
         "multi": false
       },
       {
