@@ -282,8 +282,8 @@
       },
       {
         "component": "radio-group",
-        "label": "optionToSelect",
-        "name": "Opention to Select",
+        "label": "option To Select",
+        "name": "OpentionToSelect",
         "valueType": "string",
         "options": [
           {
