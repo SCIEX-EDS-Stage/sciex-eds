@@ -281,20 +281,17 @@
         "label": "Button URL"
       },
       {
-        "component": "select",
-        "name": "linkType",
-        "label": "Type",
+        "component": "radio-group",
+        "label": "optionToSelect",
+        "name": "Opention to Select",
+        "valueType": "string",
         "options": [
           {
-            "name": "default",
-            "value": ""
-          },
-          {
-            "name": "openInSameTab",
+            "name": "Open In Same Tab",
             "value": "_self"
           },
           {
-            "name": "openInNewTab",
+            "name": "Open In New Tab",
             "value": "_blank"
           }
         ]
