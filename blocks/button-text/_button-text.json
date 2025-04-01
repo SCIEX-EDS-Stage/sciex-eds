@@ -35,6 +35,25 @@
           "component": "aem-content",
           "name": "buttonUrl",
           "label": "Button URL"
+        },
+        {
+          "component": "select",
+          "name": "linkType",
+          "label": "Type",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "openInSameTab",
+              "value": "_self"
+            },
+            {
+              "name": "openInNewTab",
+              "value": "_blank"
+            }
+          ]
         }
       ]
     }
