@@ -8,6 +8,7 @@ export default async function decorate(block) {
   const pList = block.querySelectorAll('div > div > p');
   const label = pList.length > 0 ? pList[0] : '';
   const buttonText = pList.length > 1 ? pList[1].textContent.trim() : 'Download PDF';
+  const targetValue = pList.length > 1 ? pList[3].textContent.trim() : '_blank';
 
   const anchor = block.querySelector('.button-container a');
   block.textContent = '';
@@ -30,13 +31,13 @@ export default async function decorate(block) {
 
     button.addEventListener('click', (event) => {
       event.preventDefault();
-      window.open(anchor.href, '_blank');
+      window.open(anchor.href, targetValue);
     });
 
     const wrapperAnchor = document.createElement('a');
     wrapperAnchor.href = anchor.href;
     wrapperAnchor.title = anchor.title;
-    wrapperAnchor.target = '_blank';
+    wrapperAnchor.target = targetValue;
     wrapperAnchor.rel = 'noopener noreferrer';
     wrapperAnchor.classList.add('button-link');
     wrapperAnchor.appendChild(button);
