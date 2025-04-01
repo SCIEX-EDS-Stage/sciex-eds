@@ -99,7 +99,7 @@ const renderCourseCatalogSearchResults = () => {
       // <span class="tag premium">Premium</span>
       const resultMarkup = `
         <div class="item-details"> 
-          ${ result.raw.isnewcourse || result.raw.coursetypecategories.toString() === 'Premium online'  ?  
+          ${ result.raw.isnewcourse || result.raw.coursetypecategories ?  
             `<div class="tag-container">
               ${ result.raw.coursetypecategories.toString() === 'Premium online' ? `<span class="tag premium">Premium</span>` : ''}
               ${ result.raw.isnewcourse ? `<span class="tag new">New</span>` : ''}
