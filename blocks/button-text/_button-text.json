@@ -35,6 +35,16 @@
           "component": "aem-content",
           "name": "buttonUrl",
           "label": "Button URL"
+        },
+        {
+          "component": "radio-group",
+          "label": "optionToSelect",
+          "name": "Opention to Select",
+          "valueType": "string",
+          "options": [
+            { "name": "Open In Same Tab", "value": "_self" },
+            { "name": "Open In New Tab", "value": "_blank" }
+          ]
         }
       ]
     }
