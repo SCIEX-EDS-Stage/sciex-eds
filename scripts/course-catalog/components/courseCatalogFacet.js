@@ -384,20 +384,19 @@ export function renderCourseCatalogFacet() {
     }
   }
   const desiredOrder = [
-    'certificatetypecategories-facet',
-    'typecategories-facet',
-    'scategories-facet',
-    'levelcategories-facet',
-    'techniquescategories-facet',
-    'trainingtopiccategories-facet',
-    'trainingtypecategories-facet',
     'region-facet',
+    'trainingtopiccategories-facet',
+    'techniquescategories-facet',
+    'trainingtypecategories-facet',
+    'typecategories-facet',
+    'levelcategories-facet',
+    'certificatetypecategories-facet',
+    'language-facet',
     'massspectrometerscategories-facet',
     'capillaryelectrophoresiscategories-facet',
     'scategories-facet',
-    'integratedsolutionscategories-facet',
     'softwarecategories-facet',
-    'language-facet',
+    'integratedsolutionscategories-facet',
   ];
   orderFacetChildren('facets', desiredOrder);
 }
