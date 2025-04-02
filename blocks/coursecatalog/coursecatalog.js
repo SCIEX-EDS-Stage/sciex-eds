@@ -213,8 +213,10 @@ export default async function decorate(block) {
           break;
         }
         case 9: {
-          const buttonUrl = section.querySelector('div');
-          const button = createElement('a', { classList: ['banner-button'], href: buttonUrl, text: buttonText.textContent });
+          const buttonUrl = section.querySelector('div a');
+          const button = createElement('a', {
+            classList: ['banner-button'], href: buttonUrl.getAttribute('href'), text: buttonText.textContent, target: '_blank',
+          });
           lifeSciencesDiv.appendChild(button);
           break;
         }

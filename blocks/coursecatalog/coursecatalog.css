@@ -265,6 +265,7 @@
     letter-spacing: 0.08px;
     display: inline-block;
     white-space: nowrap;
+    text-decoration: none !important;
 }
 
 .banner-image img {
