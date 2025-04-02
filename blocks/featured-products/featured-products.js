@@ -2,15 +2,23 @@ import { getCookie } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const picture = block.querySelector('picture');
-  const path = window.location.pathname;
-  const origin = window.location.origin;
+  let path = window.location.pathname.replace(/\.html$/, ''); // Remove .html if present
+  const origin = window.location.origin; // Includes protocol + hostname
+
   let response;
   try {
-    if (getCookie('cq-authoring-mode') === 'TOUCH') {
-      const trimmedPath = path.replace(/\.html$/, '');
-      response = await fetch(`${origin}/bin/sciex/tags?pagePath=${trimmedPath}`);
-    } else {
-      response = await fetch(`${origin}/bin/sciex/tags?pagePath=/content/sciex-eds${path}`);
+    let requestPath = `${origin}/bin/sciex/tags?pagePath=${encodeURIComponent(path)}`;
+
+    if (getCookie('cq-authoring-mode') !== 'TOUCH') {
+      requestPath = `${origin}/bin/sciex/tags?pagePath=${encodeURIComponent(path.replace('/content/sciex-eds', ''))}`;
+    }
+
+    console.log('Fetching:', requestPath); // Debugging line
+
+    response = await fetch(requestPath);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const data = await response.json();
@@ -35,8 +43,10 @@ export default async function decorate(block) {
       listItem.appendChild(anchor);
       listContainer.appendChild(listItem);
     });
+
     dynamicElement.appendChild(listContainer);
     block.appendChild(dynamicElement);
+
     if (picture) {
       block.appendChild(picture);
     }
