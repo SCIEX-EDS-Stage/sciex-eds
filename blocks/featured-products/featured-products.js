@@ -3,13 +3,22 @@ import { getCookie } from '../../scripts/scripts.js';
 export default async function decorate(block) {
   const picture = block.querySelector('picture');
   const path = window.location.pathname;
-  let response;
+  
   try {
+    let apiUrl;
     if (getCookie('cq-authoring-mode') === 'TOUCH') {
-      const trimmedPath = path.replace(/\.html$/, '');
-      response = await fetch(`/bin/sciex/tags?pagePath=${trimmedPath}`);
+      const trimmedPath = path.replace(/\.html$/, '').trim(); // Ensure no trailing spaces
+      console.log('Trimmed Path:', trimmedPath); // Debugging log
+      apiUrl = `/bin/sciex/tags?pagePath=${encodeURIComponent(trimmedPath)}`;
     } else {
-      response = await fetch(`/bin/sciex/tags?pagePath=/content/sciex-eds${path}`);
+      apiUrl = `/bin/sciex/tags?pagePath=/content/sciex-eds${encodeURIComponent(path)}`;
+    }
+    
+    console.log('Fetching URL:', apiUrl); // Debugging log
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const data = await response.json();
@@ -34,8 +43,10 @@ export default async function decorate(block) {
       listItem.appendChild(anchor);
       listContainer.appendChild(listItem);
     });
+
     dynamicElement.appendChild(listContainer);
     block.appendChild(dynamicElement);
+    
     if (picture) {
       block.appendChild(picture);
     }
