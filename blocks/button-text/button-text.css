@@ -5,7 +5,6 @@
 
 .button-label {
     color: var(--Neutrals-500, #707070);
-    font-family: "Geogrotesque Sharp VF";
     font-size: 16px;
     font-style: normal;
     font-weight: 330;
@@ -22,8 +21,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
     display: flex;
+    font-weight: 300;
 }
 
 .custom-button:hover {

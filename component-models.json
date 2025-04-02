@@ -458,7 +458,9 @@
     "fields": [
       {
         "component": "text",
+        "valueType": "text",
         "name": "heading",
+        "value": "",
         "label": "Heading"
       }
     ]
