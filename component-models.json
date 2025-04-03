@@ -691,15 +691,20 @@
     ]
   },
   {
-    "id": "tech-note",
+    "id": "tech-note-container",
     "fields": [
       {
         "component": "text",
-        "name": "tabId",
+        "name": "id",
         "value": "",
-        "label": "Tab Id",
+        "label": "Id",
         "valueType": "string"
-      },
+      }
+    ]
+  },
+  {
+    "id": "tech-note",
+    "fields": [
       {
         "component": "reference",
         "valueType": "string",
