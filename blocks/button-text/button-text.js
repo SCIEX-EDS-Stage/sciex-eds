@@ -23,7 +23,7 @@ export default async function decorate(block) {
     button.classList.add('custom-button');
 
     // Create arrow icon
-    const arrowIcon = span({ class: 'icon icon-Arrow' });
+    const arrowIcon = span({ class: 'icon icon-arrow' });
 
     // Append text and arrow to button
     button.appendChild(document.createTextNode(buttonText));
