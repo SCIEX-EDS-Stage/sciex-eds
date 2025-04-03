@@ -9,7 +9,7 @@ export default async function decorate(block) {
       const trimmedPath = path.replace(/\.html$/, '');
       response = await fetch(`/bin/sciex/tags?pagePath=${trimmedPath}`);
     } else {
-      response = await fetch(`/bin/sciex/tags?pagePath=/content/sciex-eds${path}`);
+      response = await fetch(`/content/sciex-eds/bin/sciex/tags?pagePath=/content/sciex-eds${path}`);
     }
 
     const data = await response.json();
