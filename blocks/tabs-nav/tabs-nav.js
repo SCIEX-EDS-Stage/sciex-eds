@@ -6,6 +6,25 @@ function showTabContent(tabId) {
     section.scrollIntoView({ behavior: 'smooth' });
   }
 }
+
+function showActiveTab() {
+  const tabs = document.querySelectorAll('.tab-section');
+  const tabContents = document.querySelectorAll('.tech-note-wrapper');
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      this.classList.add('active');
+      tabContents[index].classList.add('active');
+    });
+  });
+
+  tabs[0].classList.add('active');
+  tabContents[0].classList.add('active');
+}
+
+
 export default async function decorate(block) {
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('tw', 'tabs-nav', 'tab-buttons', 'tw-bg-white');
@@ -19,6 +38,7 @@ export default async function decorate(block) {
     blockDiv.append(tabDIv);
     tabDIv.addEventListener('click', function () {
       showTabContent(this.id);
+      showActiveTab();
     });
   });
   block.textContent = '';
