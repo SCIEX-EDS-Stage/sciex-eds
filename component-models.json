@@ -691,7 +691,7 @@
     ]
   },
   {
-    "id": "technote",
+    "id": "tech-note",
     "fields": [
       {
         "component": "text",

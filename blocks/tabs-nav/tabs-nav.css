@@ -7,3 +7,30 @@
     display: flex;
     justify-content: space-around;
   }
+
+  html {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+  }
+  
+  .tabs-nav-container {
+    margin-bottom: 20px;
+  }
+
+  .tabs-nav {
+    display: flex;
+    gap: 10px;
+    display: flex;
+      gap: 10px;
+      position: sticky;  /* Keeps the tabs fixed at the top */
+      top: 0;
+      background-color: #fff;
+      z-index: 10;  /* Ensure tabs are above the content */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+  }
+
+  .tab-section {
+    padding: 10px 20px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
