@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p93412-e851283.adobeaemcloud.com/bin/franklin.delivery/SCIEX-EDS-Nonprod/sciex-eds/main"
+    url: "https://author-p93412-e851283.adobeaemcloud.com/bin/franklin.delivery/SCIEX-EDS-Nonprod/sciex-eds/release2-stage"
     type: "markup"
     suffix: ".html"
