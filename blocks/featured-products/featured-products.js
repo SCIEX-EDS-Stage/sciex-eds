@@ -28,7 +28,7 @@ export default async function decorate(block) {
       const listItem = document.createElement('li');
       const anchor = document.createElement('a');
 
-      anchor.href = value && value.trim() !== '' ? value : '#';
+      anchor.href = value && value.trim() !== '' ? `${value}.html` : '#';
       anchor.textContent = key;
       anchor.target = '_blank';
 
