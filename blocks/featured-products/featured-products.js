@@ -3,13 +3,14 @@ import { getCookie } from '../../scripts/scripts.js';
 export default async function decorate(block) {
   const picture = block.querySelector('picture');
   const path = window.location.pathname;
+  const trimmedPath = path.replace(/\.html$/, '');
   let response;
   try {
     if (getCookie('cq-authoring-mode') === 'TOUCH') {
-      const trimmedPath = path.replace(/\.html$/, '');
-      response = await fetch(`/jcr:content/root/section.sciex.json?pagePath=${trimmedPath}`);
+      const queryPath = trimmedPath.replace(/^\/content\/sciex-eds/, '');
+      response = await fetch(`${queryPath}/jcr:content.sciex.json`);
     } else {
-      response = await fetch(`/content/sciex-eds/jcr:content/root/section.sciex.json?pagePath=/content/sciex-eds${path}`);
+      response = await fetch(`${trimmedPath}/jcr:content.sciex.json`);
     }
 
     const data = await response.json();
