@@ -10,7 +10,7 @@ export default async function decorate(block) {
       const queryPath = trimmedPath.replace(/^\/content\/sciex-eds/, '');
       response = await fetch(`${queryPath}/jcr:content.sciex.json`);
     } else {
-      response = await fetch(`${trimmedPath}/jcr:content.sciex.json`);
+      response = await fetch(`/content/sciex-eds${trimmedPath}/jcr:content.sciex.json`);
     }
 
     const data = await response.json();
