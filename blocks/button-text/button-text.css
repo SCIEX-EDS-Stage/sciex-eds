@@ -3,6 +3,10 @@
     padding: 10px;
 }
 
+.button-wrapper a {
+    display: inline-block;
+}
+
 .button-label {
     color: var(--Neutrals-500, #707070);
     font-size: 16px;

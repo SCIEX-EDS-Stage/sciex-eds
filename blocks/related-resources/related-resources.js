@@ -11,12 +11,11 @@ export default async function decorate(block) {
     const columns = [...row.children];
 
     if (columns.length >= 3) {
-      const title = columns[0]?.textContent.trim(); 
-      const linkText = columns[1]?.textContent.trim(); 
+      const title = columns[0]?.textContent.trim();
+      const linkText = columns[1]?.textContent.trim();
       const linkUrl = columns[2]?.querySelector('a')?.href;
 
       if (title && linkText && linkUrl) {
-       
         const resourceDiv = document.createElement('div');
         resourceDiv.classList.add('links-container');
 
