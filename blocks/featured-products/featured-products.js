@@ -7,9 +7,9 @@ export default async function decorate(block) {
   try {
     if (getCookie('cq-authoring-mode') === 'TOUCH') {
       const trimmedPath = path.replace(/\.html$/, '');
-      response = await fetch(`/jcr:content.sciex.json?pagePath=${trimmedPath}`);
+      response = await fetch(`/jcr:content/root/section.sciex.json?pagePath=${trimmedPath}`);
     } else {
-      response = await fetch(`/content/sciex-eds/jcr:content.sciex.json?pagePath=/content/sciex-eds${path}`);
+      response = await fetch(`/content/sciex-eds/jcr:content/root/section.sciex.json?pagePath=/content/sciex-eds${path}`);
     }
 
     const data = await response.json();
