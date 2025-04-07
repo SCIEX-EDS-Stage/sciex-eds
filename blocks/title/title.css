@@ -1,0 +1,11 @@
+
+.hero-heading {
+    align-self: stretch;
+    color: var(--Grey-900, #141414);
+    /* Desktop/text-alfa */
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 270;
+    line-height: 75px; /* 125% */
+}
+
