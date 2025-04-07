@@ -34,7 +34,17 @@
         {
           "component": "aem-content",
           "name": "buttonUrl",
-          "label": "Button URL"
+          "label": "primary Button Url"
+        },
+        {
+          "component": "radio-group",
+          "label": "option To Select secondary button url",
+          "name": "OpentionToSelectSecondary",
+          "valueType": "string",
+          "options": [
+            { "name": "Open In Same Tab", "value": "_self" },
+            { "name": "Open In New Tab", "value": "_blank" }
+          ]
         },
         {
           "component": "text",

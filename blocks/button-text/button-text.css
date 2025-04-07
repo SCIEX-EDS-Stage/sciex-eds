@@ -2,8 +2,13 @@
     margin-top: 20px;
 }
 
-.button-wrapper a {
-    display: inline-block;
+.button-wrapper a:any-link {
+    text-decoration: none;
+}
+
+.button-container {
+    display: flex;
+    gap: 12px;
 }
 
 .button-label {
@@ -28,13 +33,47 @@
     font-weight: 300;
 }
 
+a:any-link {
+    text-decoration: none;
+}
+
+.secondary-custom-button {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 12px 24px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 350;
+    border: 1px solid #0068FA;;
+    border-radius: 5px;
+}
+
 .custom-button:hover {
     background-color: #0056b3;
 }
 
-.button-link {
+.secondary-custom-button:hover {
+    background-color: white;
     text-decoration: none;
 }
+
+.custom-button span,
+.secondary-custom-button span {
+    padding-left: 15px;
+}
+
+
+.custom-button span {
+    padding-left: 15px;
+}
+
+
+.secondary-custom-button span .icon img{
+    color: black;
+}
+
+
 
 .custom-button:hover .arrow {
     transform: translateX(5px);
