@@ -276,14 +276,19 @@
         "label": "Primary Button Text"
       },
       {
+        "component": "aem-content",
+        "name": "buttonUrl",
+        "label": "Button URL"
+      },
+      {
         "component": "text",
         "name": "buttonTextHow",
         "label": "Secondary Button Text"
       },
       {
         "component": "aem-content",
-        "name": "buttonUrl",
-        "label": "Button URL"
+        "name": "secondaryButtonUrl",
+        "label": "Secondary Button Url"
       },
       {
         "component": "radio-group",
