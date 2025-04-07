@@ -3,7 +3,7 @@ import { searchBoxController, headlessResultsList } from '../controller/controll
 import { getCookie } from '../../scripts.js';
 import { getMetadata } from '../../aem.js';
 
-const renderSearchBox = () => {
+const renderSearchBox = (queryText) => {
   const queryInput = document.getElementById('coveo-query');
   const suggestionPopup = document.getElementById('suggestion-popup');
   const coveoResults = document.getElementById('coveo-results');
@@ -13,6 +13,12 @@ const renderSearchBox = () => {
   searchTermContainer.style.display = 'none';
   clearSearch.style.display = 'none';
   suggestionPopup.style.display = 'none';
+
+  if(queryText){
+    queryInput.value = queryText;
+    searchTermValue.innerHTML = queryText;
+    searchTermContainer.style.display = 'block';
+  }
 
   const showSuggestions = () => {
     const searchBox = document.getElementById('coveo-query');
@@ -32,6 +38,17 @@ const renderSearchBox = () => {
           </div>`)
         .join('');
       suggestionPopup.style.display = 'block';
+      suggestions.forEach((suggestion, index) => {
+        const suggestionItem = suggestionPopup.querySelectorAll('.suggestion-item')[index];
+        suggestionItem.addEventListener('click', () => {
+          const rawValue = suggestion.rawValue;
+          searchBoxController.selectSuggestion(rawValue)
+          queryInput.value = rawValue;
+          searchTermValue.innerHTML = rawValue;
+          searchTermContainer.style.display = 'block';
+          suggestionPopup.style.display = 'none';
+        });
+      });
     } else {
       suggestionPopup.style.display = 'none';
     }

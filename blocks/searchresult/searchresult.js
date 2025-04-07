@@ -1,4 +1,6 @@
 import {} from '../../scripts/aem.js';
+// eslint-disable-next-line
+import { loadQueryActions, loadFacetSetActions } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
 import { searchEngine } from '../../scripts/searchresult/engine.js';
 import renderSearchBox from '../../scripts/searchresult/components/renderSearchBox.js';
 import renderSearchResults from '../../scripts/searchresult/components/renderSearchResult.js';
@@ -10,6 +12,7 @@ import renderPagination from '../../scripts/searchresult/components/pagination.j
 import renderQuerySummary from '../../scripts/searchresult/components/querySummary.js';
 import renderSorting from '../../scripts/searchresult/components/sorting.js';
 import { renderFacetBreadcurm, handleClearMobileFilters } from '../../scripts/searchresult/components/facetBreadcrumb.js';
+import { contentTypeFacetController } from '../../scripts/searchresult/controller/controllers.js';
 
 export default async function decorate(block) {
   // Create main container div
@@ -357,8 +360,28 @@ export default async function decorate(block) {
 
   document.body.appendChild(suggestionPopupDiv);
 
+  const pageUrl = new URL(window.location.href);
+  let query;
+
   try {
-    renderSearchBox();
+    if (pageUrl.search) {
+      const params = new URLSearchParams(pageUrl.search);
+      query = params.get('term');
+      const contentType = params.get('contentType');
+      const { updateQuery } = loadQueryActions(searchEngine);
+      const { toggleSelectFacetValue } = loadFacetSetActions(searchEngine);
+      searchEngine.dispatch(updateQuery({
+        q: query,
+      }));
+      if (contentType !== 'All') {
+        searchEngine.dispatch(toggleSelectFacetValue({
+          facetId: 'contenttype',
+          selection: { value: contentType, state: 'selected' },
+        }));
+        contentTypeFacetController.showMoreValues();
+      }
+    }
+    renderSearchBox(query);
     renderSorting();
     searchEngine.executeFirstSearch();
     searchEngine.subscribe(() => {
