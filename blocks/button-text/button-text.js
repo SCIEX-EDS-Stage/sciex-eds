@@ -5,44 +5,72 @@ export default async function decorate(block) {
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('button-wrapper');
 
-  const pList = block.querySelectorAll('div > div > p');
-  const label = pList.length > 0 ? pList[0] : '';
-  const buttonText = pList.length > 1 ? pList[1].textContent.trim() : 'Download PDF';
-  const targetValue = pList.length > 1 ? pList[3].textContent.trim() : '_blank';
+  const pList = [...block.querySelectorAll('div > div > p')];
+  const [label, primaryTextP, , secondaryTextP, , targetValueP] = pList;
 
-  const anchor = block.querySelector('.button-container a');
+  const primaryButtonText = primaryTextP?.textContent.trim() || 'Download PDF';
+  const secondaryButtonText = secondaryTextP?.textContent.trim();
+  const targetValue = targetValueP?.textContent.trim() || '_blank';
+
+  const anchors = [...block.querySelectorAll('.button-container a')];
   block.textContent = '';
 
-  if (anchor) {
+  // Helper to build buttons wrapped in anchors
+  const createButtonAnchor = (text, href, title, icon, className) => {
+    const button = document.createElement('button');
+    button.classList.add(className);
+    button.appendChild(document.createTextNode(text));
+    button.appendChild(span({ class: `icon icon-${icon}` }));
+
+    const anchor = document.createElement('a');
+    anchor.href = href;
+    anchor.title = title;
+    anchor.target = targetValue;
+    anchor.rel = 'noopener noreferrer';
+    anchor.classList.add('button-link');
+    anchor.appendChild(button);
+
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open(href, targetValue);
+    });
+
+    decorateIcons(anchor);
+    return anchor;
+  };
+
+  if (anchors.length >= 1) {
     if (label) {
       label.classList.add('button-label');
       blockDiv.appendChild(label);
     }
 
-    const button = document.createElement('button');
-    button.classList.add('custom-button');
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
 
-    // Create arrow icon
-    const arrowIcon = span({ class: 'icon icon-arrow' });
 
-    // Append text and arrow to button
-    button.appendChild(document.createTextNode(buttonText));
-    button.appendChild(arrowIcon);
+    const primaryBtnAnchor = createButtonAnchor(
+      primaryButtonText,
+      anchors[0].href,
+      anchors[0].title,
+      'arrow',
+      'custom-button'
+    );
+    buttonContainer.appendChild(primaryBtnAnchor);
 
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      window.open(anchor.href, targetValue);
-    });
+    // Secondary button (conditionally rendered)
+    if (secondaryButtonText && secondaryButtonText.trim().length > 0 && anchors[1]) {
+      const secondaryBtnAnchor = createButtonAnchor(
+        secondaryButtonText.trim(),
+        anchors[1].href,
+        anchors[1].title,
+        'white-arrow',
+        'secondary-custom-button'
+      );
+      buttonContainer.appendChild(secondaryBtnAnchor);
+    }
 
-    const wrapperAnchor = document.createElement('a');
-    wrapperAnchor.href = anchor.href;
-    wrapperAnchor.title = anchor.title;
-    wrapperAnchor.target = targetValue;
-    wrapperAnchor.rel = 'noopener noreferrer';
-    wrapperAnchor.classList.add('button-link');
-    wrapperAnchor.appendChild(button);
-    decorateIcons(wrapperAnchor);
-    blockDiv.appendChild(wrapperAnchor);
+    blockDiv.appendChild(buttonContainer);
   }
 
   block.append(blockDiv);
