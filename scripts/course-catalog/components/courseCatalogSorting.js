@@ -32,7 +32,6 @@ const renderCourseCatalogSorting = () => {
   const sortOptions = [
     { label: 'Relevancy', criterion: { by: 'relevancy' } },
     { label: 'Title', criterion: { by: 'field', field: 'title' } },
-    { label: 'Date', criterion: { by: 'indexeddate', field: 'indexeddate' } },
   ];
   const sortLabel = document.createElement('div');
   sortLabel.innerHTML = 'Sort By:';
