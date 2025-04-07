@@ -21,10 +21,15 @@
       "id": "title",
       "fields": [
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "Id",
+          "label": "Id"
+        },
+        {
           "component": "richtext",
           "valueType": "string",
           "name": "Title",
-          "value": "",
           "label": "Title"
         }
       ]
