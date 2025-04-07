@@ -359,6 +359,8 @@ function renderSearchFacets(facetController, facetItemsContainer, facetElement, 
 }
 
 export function renderCourseCatalogFacet() {
+  const facets = document.querySelector('#facets');
+  facets.innerHTML = '';
   const facetController = allFacetController;
   const facetsId = {
     isnewcourse: '',
@@ -384,6 +386,7 @@ export function renderCourseCatalogFacet() {
     }
   }
   const desiredOrder = [
+    'language-facet',
     'region-facet',
     'trainingtopiccategories-facet',
     'techniquescategories-facet',
@@ -391,7 +394,6 @@ export function renderCourseCatalogFacet() {
     'typecategories-facet',
     'levelcategories-facet',
     'certificatetypecategories-facet',
-    'language-facet',
     'massspectrometerscategories-facet',
     'capillaryelectrophoresiscategories-facet',
     'scategories-facet',
