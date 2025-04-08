@@ -1,5 +1,4 @@
-import { courseCatalogResultsList, courseCatalogSortController } from '../course-catalog-controller/controllers.js';
-import renderCourseCatalogSearchResults from './renderCourseCatalogSearchResult.js';
+import { courseCatalogSortController } from '../course-catalog-controller/controllers.js';
 
 export function sortByTitle(data) {
   return [...data].sort((a, b) => a.title.localeCompare(b.title));
@@ -13,15 +12,10 @@ export function sortByDateDescending(data) {
 }
 export const sortCondition = {
   sortBy: (criterion) => {
-    const values = courseCatalogResultsList.state.results;
-    if (criterion.by === 'field' && criterion.field === 'title') {
-      // Sorting by Title
-      return sortByTitle(values);
-    } if (criterion.by === 'indexeddate') {
-      // Sorting by Date Ascending
-      return sortByDateDescending(values);
-    } if (criterion.by === 'relevancy') {
-      return courseCatalogSortController.sortBy(criterion);
+    if (criterion.by === 'field') {
+      courseCatalogSortController.sortBy(criterion);
+    } else if (criterion.by === 'relevancy') {
+      courseCatalogSortController.sortBy(criterion);
     }
     return '';
   },
@@ -31,7 +25,7 @@ const renderCourseCatalogSorting = () => {
   sortElement.innerHTML = '';
   const sortOptions = [
     { label: 'Relevancy', criterion: { by: 'relevancy' } },
-    { label: 'Title', criterion: { by: 'field', field: 'title' } },
+    { label: 'Title', criterion: { by: 'field', field: 'title', order: 'ascending' } },
   ];
   const sortLabel = document.createElement('div');
   sortLabel.innerHTML = 'Sort By:';
@@ -46,10 +40,9 @@ const renderCourseCatalogSorting = () => {
     selectElement.appendChild(optionElement);
   });
 
-  selectElement.addEventListener('change', () => {
-    // const selectedCriterion = JSON.parse(event.target.value);
-    // const sortedData = sortCondition.sortBy(selectedCriterion);
-    renderCourseCatalogSearchResults();
+  selectElement.addEventListener('change', (event) => {
+    const selectedCriterion = JSON.parse(event.target.value);
+    sortCondition.sortBy(selectedCriterion);
   });
   sortElement.appendChild(sortLabel);
   sortElement.appendChild(selectElement);
