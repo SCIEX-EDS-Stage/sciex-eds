@@ -267,7 +267,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "Id",
+        "name": "id",
         "label": "Id"
       },
       {
@@ -561,7 +561,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "Id",
+        "name": "id",
         "label": "Id"
       },
       {
@@ -900,7 +900,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "Id",
+        "name": "id",
         "label": "Id"
       },
       {
