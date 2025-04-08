@@ -718,6 +718,18 @@
     ]
   },
   {
+    "id": "tabs-container",
+    "fields": [
+      {
+        "component": "text",
+        "name": "id",
+        "value": "",
+        "label": "Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "tab",
     "fields": [
       {
@@ -730,18 +742,6 @@
       {
         "component": "text",
         "name": "tabId",
-        "value": "",
-        "label": "Tab Id",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "tech-note-container",
-    "fields": [
-      {
-        "component": "text",
-        "name": "id",
         "value": "",
         "label": "Id",
         "valueType": "string"

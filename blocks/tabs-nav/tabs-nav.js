@@ -1,15 +1,15 @@
 import {} from '../../scripts/aem.js';
 
-function showTabContent(tabId) {
+/*function showTabContent(tabId) {
   const section = document.getElementById(`${tabId}-content`);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
   }
-}
+}*/
 
 function showActiveTab() {
   const tabs = document.querySelectorAll('.tab-section');
-  const tabContents = document.querySelectorAll('.tech-note-wrapper');
+  const tabContents = document.querySelectorAll('.tabs-container-wrapper');
 
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', function () {
@@ -26,7 +26,7 @@ function showActiveTab() {
 
 export default async function decorate(block) {
   const blockDiv = document.createElement('div');
-  blockDiv.classList.add('tw', 'tabs-nav', 'tab-buttons', 'tw-bg-white');
+  blockDiv.classList.add('tabs-nav', 'tab-buttons');
   const tabData = document.createElement('div');
   tabData.classList.add('tab-data');
   [...block.children].forEach((row) => {
@@ -36,7 +36,7 @@ export default async function decorate(block) {
     tabDIv.textContent = row.children[0].textContent;
     blockDiv.append(tabDIv);
     tabDIv.addEventListener('click', function () {
-      showTabContent(this.id);
+      //showTabContent(this.id);
       showActiveTab();
     });
   });
