@@ -10,7 +10,9 @@
             "template": {
               "name": "button-text",
               "model": "button-text",
-              "Id" : "button-text"
+              "Id" : "button-text",
+              "OpentionToSelectPrimary": "_blank",
+              "OpentionToSelectSecondary":"_blank"
             }
           }
         }

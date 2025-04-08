@@ -107,7 +107,9 @@
                 "template": {
                   "name": "button-text",
                   "model": "button-text",
-                  "Id": "button-text"
+                  "Id": "button-text",
+                  "OpentionToSelectPrimary": "_blank",
+                  "OpentionToSelectSecondary": "_blank"
                 }
               }
             }
@@ -258,7 +260,8 @@
                 "template": {
                   "name": "related-resources",
                   "model": "related-resources",
-                  "filter": "related-resources"
+                  "filter": "related-resources",
+                  "Id": "related-resource"
                 }
               }
             }
@@ -273,8 +276,7 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Resource",
-                  "model": "resource",
-                  "card_titleType": "h2"
+                  "model": "resource"
                 }
               }
             }
