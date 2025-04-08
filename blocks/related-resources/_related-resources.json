@@ -10,8 +10,7 @@
             "template": {
               "name": "related-resources",
               "model": "related-resources",
-              "filter": "related-resources",
-              "id" : "related-resource"
+              "filter": "related-resources"
             }
           }
         }
