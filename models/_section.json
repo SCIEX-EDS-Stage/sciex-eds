@@ -59,7 +59,8 @@
         "button-text",
         "title",
         "tech-note",
-        "tabs-container"
+        "tabs-container",
+        "survey-script"
       ]
     }
   ]
