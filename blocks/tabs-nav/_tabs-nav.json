@@ -45,7 +45,7 @@
           "component": "text",
           "name": "tabId",
           "value": "",
-          "label": "Tab Id",
+          "label": "Id",
           "valueType": "string"
         }
       ]

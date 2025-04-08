@@ -30,7 +30,7 @@
       "button-text",
       "title",
       "tech-note",
-      "tech-note-container"
+      "tabs-container"
     ]
   },
   {
@@ -77,19 +77,16 @@
     ]
   },
   {
-    "id": "tabs-nav",
+    "id": "tabs-container",
     "components": [
-      "tab"
+      "title",
+      "tech-note"
     ]
   },
   {
-    "id": "tech-note-container",
+    "id": "tabs-nav",
     "components": [
-      "text",
-      "image",
-      "button",
-      "title",
-      "tech-note"
+      "tab"
     ]
   }
 ]
