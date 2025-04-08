@@ -2,12 +2,12 @@ export default async function decorate(block) {
   // Create main container div
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('related-resources');
-  const heading = block.children[0].textContent;
+  const heading = block.children[1].textContent;
   const headingDiv = document.createElement('div');
   headingDiv.classList.add('heading');
   headingDiv.append(heading);
   blockDiv.append(headingDiv);
-  [...block.children].slice(1, 5).forEach((row) => {
+  [...block.children].slice(2, 6).forEach((row) => {
     const columns = [...row.children];
 
     if (columns.length >= 3) {

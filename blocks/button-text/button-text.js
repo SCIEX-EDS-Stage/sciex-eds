@@ -6,7 +6,7 @@ export default async function decorate(block) {
   blockDiv.classList.add('button-wrapper');
 
   const pList = [...block.querySelectorAll('div > div > p')];
-  const [label, primaryTextP, , targetValueP, secondaryTextP, , targetValueS] = pList;
+  const [ ,label, primaryTextP, ,targetValueP, secondaryTextP, , targetValueS] = pList;
 
   const primaryButtonText = primaryTextP?.textContent.trim() || 'Download PDF';
   const secondaryButtonText = secondaryTextP?.textContent.trim();
