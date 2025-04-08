@@ -145,6 +145,20 @@
               "name": "enableSiteInterceptScript",
               "label": "Enable Site Intercept Script",
               "value": "false"
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "enableSurveyScript",
+              "label": "Enable Survey Script",
+              "value": "false"
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "surveyScript",
+              "label": "Survey Script",
+              "value": ""
             }               
           ]
         }
