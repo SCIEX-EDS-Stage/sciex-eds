@@ -10,7 +10,7 @@
             "template": {
               "name": "button-text",
               "model": "button-text",
-              "Id" : "button-text",
+              "id" : "button-text",
               "OpentionToSelectPrimary": "_blank",
               "OpentionToSelectSecondary":"_blank"
             }
@@ -26,7 +26,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "Id",
+          "name": "id",
           "label": "Id"
         },
         {
