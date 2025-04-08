@@ -1,11 +1,11 @@
 import {} from '../../scripts/aem.js';
 
-/*function showTabContent(tabId) {
+/* function showTabContent(tabId) {
   const section = document.getElementById(`${tabId}-content`);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
   }
-}*/
+}
 
 function showActiveTab() {
   const tabs = document.querySelectorAll('.tab-section');
@@ -23,7 +23,7 @@ function showActiveTab() {
   tabs[0].classList.add('active');
   tabContents[0].classList.add('active');
 }
-
+*/
 export default async function decorate(block) {
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('tabs-nav', 'tab-buttons');
@@ -35,9 +35,9 @@ export default async function decorate(block) {
     tabDIv.classList.add('tab-section');
     tabDIv.textContent = row.children[0].textContent;
     blockDiv.append(tabDIv);
-    tabDIv.addEventListener('click', function () {
-      //showTabContent(this.id);
-      showActiveTab();
+    tabDIv.addEventListener('click', () => {
+      // showTabContent(this.id);
+      // showActiveTab();
     });
   });
   block.textContent = '';
