@@ -10,8 +10,7 @@
             "template": {
               "name": "related-resources",
               "model": "related-resources",
-              "filter": "related-resources",
-              "Id" : "related-resource"
+              "filter": "related-resources"
             }
           }
         }
@@ -40,7 +39,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "Id",
+          "name": "id",
           "label": "Id"
         },
         {

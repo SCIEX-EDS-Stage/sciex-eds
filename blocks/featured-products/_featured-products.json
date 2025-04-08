@@ -23,7 +23,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "Id",
+          "name": "id",
           "label": "Id"
         },
         {
