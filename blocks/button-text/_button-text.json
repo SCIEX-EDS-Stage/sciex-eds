@@ -21,6 +21,12 @@
       "id": "button-text",
       "fields": [
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "Id",
+          "label": "Id"
+        },
+        {
          "component": "richtext",
           "valueType": "string",
           "name": "linkText",
@@ -38,8 +44,8 @@
         },
         {
           "component": "radio-group",
-          "label": "option To Select secondary button url",
-          "name": "OpentionToSelectSecondary",
+          "label": "option To Select primary button url",
+          "name": "OpentionToSelectPrimary",
           "valueType": "string",
           "options": [
             { "name": "Open In Same Tab", "value": "_self" },
@@ -58,8 +64,8 @@
         },
         {
           "component": "radio-group",
-          "label": "option To Select",
-          "name": "OpentionToSelect",
+          "label": "option To Select Secondary button url",
+          "name": "OpentionToSelectSecondary",
           "valueType": "string",
           "options": [
             { "name": "Open In Same Tab", "value": "_self" },

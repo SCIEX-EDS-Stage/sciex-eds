@@ -265,6 +265,12 @@
     "id": "button-text",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "Id",
+        "label": "Id"
+      },
+      {
         "component": "richtext",
         "valueType": "string",
         "name": "linkText",
@@ -282,8 +288,8 @@
       },
       {
         "component": "radio-group",
-        "label": "option To Select secondary button url",
-        "name": "OpentionToSelectSecondary",
+        "label": "option To Select primary button url",
+        "name": "OpentionToSelectPrimary",
         "valueType": "string",
         "options": [
           {
@@ -308,8 +314,8 @@
       },
       {
         "component": "radio-group",
-        "label": "option To Select",
-        "name": "OpentionToSelect",
+        "label": "option To Select Secondary button url",
+        "name": "OpentionToSelectSecondary",
         "valueType": "string",
         "options": [
           {
@@ -430,6 +436,12 @@
     "id": "featured-products",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "Id",
+        "label": "Id"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",
@@ -482,6 +494,12 @@
   {
     "id": "related-resources",
     "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Id",
+        "label": "Id"
+      },
       {
         "component": "text",
         "valueType": "text",

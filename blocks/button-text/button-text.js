@@ -6,17 +6,18 @@ export default async function decorate(block) {
   blockDiv.classList.add('button-wrapper');
 
   const pList = [...block.querySelectorAll('div > div > p')];
-  const [label, primaryTextP, , secondaryTextP, , targetValueP] = pList;
+  const [label, primaryTextP, , targetValueP, secondaryTextP, , targetValueS] = pList;
 
   const primaryButtonText = primaryTextP?.textContent.trim() || 'Download PDF';
   const secondaryButtonText = secondaryTextP?.textContent.trim();
   const targetValue = targetValueP?.textContent.trim() || '_blank';
+  const targetValue_S = targetValueS?.textContent.trim() || '_blank';
 
   const anchors = [...block.querySelectorAll('.button-container a')];
   block.textContent = '';
 
   // Helper to build buttons wrapped in anchors
-  const createButtonAnchor = (text, href, title, icon, className) => {
+  const createButtonAnchor = (text, href, title, target, icon, className) => {
     const button = document.createElement('button');
     button.classList.add(className);
     button.appendChild(document.createTextNode(text));
@@ -25,14 +26,14 @@ export default async function decorate(block) {
     const anchor = document.createElement('a');
     anchor.href = href;
     anchor.title = title;
-    anchor.target = targetValue;
+    anchor.target = target;
     anchor.rel = 'noopener noreferrer';
     anchor.classList.add('button-link');
     anchor.appendChild(button);
 
     button.addEventListener('click', (e) => {
       e.preventDefault();
-      window.open(href, targetValue);
+      window.open(href, target);
     });
 
     decorateIcons(anchor);
@@ -53,6 +54,7 @@ export default async function decorate(block) {
       primaryButtonText,
       anchors[0].href,
       anchors[0].title,
+      targetValue,
       'arrow',
       'custom-button'
     );
@@ -64,6 +66,7 @@ export default async function decorate(block) {
         secondaryButtonText.trim(),
         anchors[1].href,
         anchors[1].title,
+        targetValue_S,
         'white-arrow',
         'secondary-custom-button'
       );
