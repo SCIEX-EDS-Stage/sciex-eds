@@ -11,7 +11,7 @@ export default async function decorate(block) {
   const primaryButtonText = primaryTextP?.textContent.trim() || 'Download PDF';
   const secondaryButtonText = secondaryTextP?.textContent.trim();
   const targetValue = targetValueP?.textContent.trim() || '_blank';
-  const targetValue_S = targetValueS?.textContent.trim() || '_blank';
+  const targetValueSecondary = targetValueS?.textContent.trim() || '_blank';
 
   const anchors = [...block.querySelectorAll('.button-container a')];
   block.textContent = '';
@@ -49,14 +49,13 @@ export default async function decorate(block) {
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
 
-
     const primaryBtnAnchor = createButtonAnchor(
       primaryButtonText,
       anchors[0].href,
       anchors[0].title,
       targetValue,
       'arrow',
-      'custom-button'
+      'custom-button',
     );
     buttonContainer.appendChild(primaryBtnAnchor);
 
@@ -66,9 +65,9 @@ export default async function decorate(block) {
         secondaryButtonText.trim(),
         anchors[1].href,
         anchors[1].title,
-        targetValue_S,
+        targetValueSecondary,
         'white-arrow',
-        'secondary-custom-button'
+        'secondary-custom-button',
       );
       buttonContainer.appendChild(secondaryBtnAnchor);
     }
