@@ -470,6 +470,7 @@ function createGlobalSearch() {
   searchBox.placeholder = 'Search';
   searchBox.className = 'standalone-search-box';
   searchBox.id = 'standalone-search-box';
+  searchBox.maxLength = 20;
 
   const dropdown = document.createElement('div');
   dropdown.className = 'dropdown';

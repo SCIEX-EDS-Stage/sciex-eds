@@ -606,7 +606,7 @@
     position: relative;
 }
 
-.clear-search {
+#clear-search {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -706,6 +706,7 @@
 
 .description ul {
     list-style-type: disc;
+    padding-left: 20px;
 }
 
 .description strong {

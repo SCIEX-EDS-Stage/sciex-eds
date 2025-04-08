@@ -76,6 +76,7 @@ export default async function decorate(block) {
     type: 'text',
     id: 'coveo-query',
     placeholder: 'Search...',
+    maxLength: 20,
     classList: ['search-box', 'tw-w-full', 'tw-py-3', 'tw-px-4', 'tw-border', 'tw-border-gray-300', 'tw-rounded-md'],
   });
 

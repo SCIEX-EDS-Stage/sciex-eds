@@ -22,26 +22,8 @@ const renderCourseCatalogSearchResults = () => {
   resultsElement.innerHTML = '';
 
   const results = courseCatalogResultsList.state.results || [];
-  const selectElement = document.getElementById('sort-element');
-  const selectedValue = selectElement.value;
-  const selectedCriterion = JSON.parse(selectedValue);
-  let sortedResults;
-  if (selectedCriterion.by === 'relevancy') {
-    sortedResults = results;
-  } else if (
-    selectedCriterion.by === 'field'
-    && selectedCriterion.field === 'title'
-  ) {
-    sortedResults = [...results].sort((a, b) => a.title.localeCompare(b.title));
-  } else if (selectedCriterion.by === 'indexeddate') {
-    sortedResults = [...results].sort((a, b) => {
-      const dateA = new Date(a.indexeddate);
-      const dateB = new Date(b.indexeddate);
-      return dateB - dateA;
-    });
-  } else {
-    sortedResults = results; // No sorting
-  }
+  let sortedResults = results;
+ 
 
   if (sortedResults.length > 0) {
     // hide loader
@@ -54,7 +36,6 @@ const renderCourseCatalogSearchResults = () => {
         facets.classList.remove('tw-hidden');
       }
     }
-    selectElement.removeAttribute('style');
     sortElement.removeAttribute('style');
     noResultsElement.style.display = 'none';
     querySortElement.style.display = '';
