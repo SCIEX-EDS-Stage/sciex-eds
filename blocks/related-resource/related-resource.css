@@ -1,15 +1,15 @@
-.related-resource {
+.resource {
     background-color: white;
     padding-top: 20px;
   }
 
-  .related-resource a {
+  .resource a {
     color: rgba(0, 104, 250, 0.9);
     text-decoration: underline;
     transition: all 0.2s ease;
 }
 
-.related-resource a:hover {
+.resource a:hover {
     text-decoration: none;
     font-weight: 600; 
     transform: scale(0.95); 

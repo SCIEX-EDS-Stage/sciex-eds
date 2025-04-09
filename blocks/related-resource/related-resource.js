@@ -1,7 +1,7 @@
 export default async function decorate(block) {
   // Create main container div
   const blockDiv = document.createElement('div');
-  blockDiv.classList.add('related-resource');
+  blockDiv.classList.add('resource');
   const heading = block.children[1]?.textContent?.trim() || 'Related Resources';
   const headingDiv = document.createElement('div');
   headingDiv.classList.add('heading');
