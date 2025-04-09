@@ -90,5 +90,11 @@
     "components": [
       "tab"
     ]
+  },
+  {
+    "id": "tabs-navigation",
+    "components": [
+      "tabItem"
+    ]
   }
 ]
