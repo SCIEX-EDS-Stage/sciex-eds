@@ -124,6 +124,7 @@ function renderFacet(facetElementId, facetController, headerText) {
     const facetInput = document.createElement('input');
     facetInput.type = 'text';
     facetInput.id = `${facetId}-input`;
+    facetInput.maxLength = 20;
     facetInput.classList.add(
       'tw-border',
       'tw-p-2',
@@ -190,7 +191,7 @@ function renderFacet(facetElementId, facetController, headerText) {
         const focusedElementId = sessionStorage.getItem('focusedElement');
         if (focusedElementId) {
           const focusElement = document.getElementById(focusedElementId);
-          focusElement.value = '';
+          focusElement ? focusElement.value = '' : '';
           sessionStorage.removeItem('focusedElement');
         }
         facetController.toggleSelect(value);
@@ -376,7 +377,8 @@ export function renderCourseCatalogFacet() {
     softwarecategories: 'Software',
     region: 'Training location',
     capillaryelectrophoresiscategories: 'Capillary electrophoresis',
-    language : 'Language'
+    language : 'Language',
+    applications: 'Applications',
   };
 
   for (const item in facetsId) {
@@ -399,6 +401,7 @@ export function renderCourseCatalogFacet() {
     'scategories-facet',
     'softwarecategories-facet',
     'integratedsolutionscategories-facet',
+    'applications-facet'
   ];
   orderFacetChildren('facets', desiredOrder);
 }

@@ -189,7 +189,7 @@ if(!isSearch){
         const focusedElementId = sessionStorage.getItem('focusedElement');
         if(focusedElementId){
           const focusElement = document.getElementById(focusedElementId);
-          focusElement.value = '';
+          focusElement ? focusElement.value = '' : '';
           sessionStorage.removeItem('focusedElement');
         }
         facetController.toggleSelect(value);
