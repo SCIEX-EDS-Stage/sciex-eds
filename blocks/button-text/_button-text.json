@@ -24,7 +24,8 @@
           "component": "text",
           "valueType": "string",
           "name": "id",
-          "label": "Id"
+          "label": "Id",
+          "value": "button-text"
         },
         {
          "component": "richtext",
@@ -35,12 +36,15 @@
         {
           "component": "text",
           "name": "buttonText",
-          "label": "Primary Button Text"
+          "label": "Primary Button Text",
+          "value": "Download PDF"
         },
         {
           "component": "aem-content",
           "name": "buttonUrl",
-          "label": "primary Button Url"
+          "label": "primary Button Url",
+          "value": "#"
+
         },
         {
           "component": "radio-group",
