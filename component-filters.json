@@ -30,7 +30,7 @@
       "tech-note",
       "customer-document",
       "survey-script",
-      "resources"
+      "related-resources"
     ]
   },
   {
@@ -61,9 +61,9 @@
     ]
   },
   {
-    "id": "resources",
+    "id": "related-resources",
     "components": [
-      "resource-item"
+      "resource"
     ]
   },
   {
