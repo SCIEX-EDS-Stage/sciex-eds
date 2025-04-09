@@ -151,13 +151,6 @@
             "name": "enableSurveyScript",
             "label": "Enable Survey Script",
             "value": "false"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "surveyScript",
-            "label": "Survey Script",
-            "value": ""
           }
         ]
       }
@@ -792,6 +785,18 @@
         "value": "",
         "label": "Coveo Search Engine Access Token",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "survey-script",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "id",
+        "label": "Id",
+        "value": "abstract"
       }
     ]
   },
