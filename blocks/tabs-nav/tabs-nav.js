@@ -6,11 +6,7 @@ export default async function decorate(block) {
   const tabData = document.createElement('div');
   tabData.classList.add('tab-data');
   [...block.children].forEach((row) => {
-    const tabDIv = document.createElement('div');
-    tabDIv.id = row.children[1].textContent;
-    tabDIv.classList.add('tab-section');
-    tabDIv.textContent = row.children[0].textContent;
-    blockDiv.append(tabDIv);
+    console.log('row>'+row.textContent);
   });
   block.textContent = '';
   block.append(blockDiv);
