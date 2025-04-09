@@ -569,14 +569,15 @@
         "component": "text",
         "valueType": "string",
         "name": "relatedresourceid",
-        "label": "RelatedresourceId"
+        "label": "RelatedresourceId",
+        "value": "related-resource"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "heading",
         "label": "Heading",
-        "value": ""
+        "value": "Related Resources"
       }
     ]
   },
