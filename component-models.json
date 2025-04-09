@@ -748,6 +748,23 @@
     ]
   },
   {
+    "id": "sciex-title",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleId",
+        "label": "Title Id"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "Title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
     "id": "searchresult",
     "fields": [
       {
@@ -916,23 +933,6 @@
             "value": "image-bottom"
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "title",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "titleId",
-        "label": "Title Id"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "Title",
-        "label": "Title"
       }
     ]
   }
