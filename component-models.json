@@ -835,6 +835,25 @@
     ]
   },
   {
+    "id": "tabItem",
+    "fields": [
+      {
+        "component": "text",
+        "name": "tabname",
+        "value": "",
+        "label": "Tab Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "tabid",
+        "value": "",
+        "label": "Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "tech-note",
     "fields": [
       {
