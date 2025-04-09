@@ -25,12 +25,12 @@
       "breadcrumb",
       "featured-products",
       "coursecatalog",
-      "related-resource",
       "button-text",
       "sciex-title",
       "tech-note",
       "customer-document",
-      "survey-script"
+      "survey-script",
+      "resources"
     ]
   },
   {
@@ -61,9 +61,9 @@
     ]
   },
   {
-    "id": "related-resource",
+    "id": "resources",
     "components": [
-      "resource"
+      "resource-item"
     ]
   },
   {

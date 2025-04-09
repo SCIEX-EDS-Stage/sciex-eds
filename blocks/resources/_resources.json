@@ -1,31 +1,31 @@
 {
     "definitions": [
       {
-        "title": "Related Resource",
-        "id": "related-resource",
+        "title": "Resources",
+        "id": "resources",
         "plugins": {
           "xwalk": {
             "page": {
               "resourceType": "core/franklin/components/block/v1/block",
               "template": {
-                "name": "Related Resource",
-                "model": "related-resource",
-                "filter": "related-resource"
+                "name": "Resources",
+                "model": "resources",
+                "filter": "resources"
               }
             }
           }
         }
       },
       {
-        "title": "Resource",
-        "id": "resource",
+        "title": "Resource item",
+        "id": "resource-item",
         "plugins": {
           "xwalk": {
             "page": {
               "resourceType": "core/franklin/components/block/v1/block/item",
               "template": {
-                "name": "Resource",
-                "model": "resource"
+                "name": "resource-item",
+                "model": "resource-item"
               }
             }
           }
@@ -34,48 +34,42 @@
     ],
     "models": [
       {
-        "id": "related-resource",
+        "id": "resources",
         "fields": [
             {
                 "component": "text",
                 "valueType": "string",
-                "name": "relatedresourceid",
-                "label": "RelatedresourceId",
-                "value": "related-resource"
-            },
-            {
-                "component": "text",
-                "valueType": "string",
                 "name": "heading",
-                "label": "Heading",
-                "value": "Related Resources"
+                "label": "Heading"
             }
         ]
       },
       {
-        "id": "resource",
+        "id": "resource-item",
         "fields": [
             {
                 "component": "text",
                 "valueType": "string",
                 "name": "subheading",
-                "label": "SubHeading",
-                "value": ""
+                "label": "SubHeading"
             },
             {
                 "component": "text",
                 "name": "linkText",
-                "label": "Link Text"
+                "label": "Link Text",
+                 "valueType": "string"
             },
             {
                 "component": "aem-content",
                 "name": "linkUrl",
-                "label": "Link URL"
+                "label": "Link URL",
+                 "valueType": "string"
             },
             {
                 "component": "text",
                 "name": "openInNewtab",
                 "label": "Open in a new tab",
+                 "valueType": "string",
                 "value": "false"
             }
         ]
@@ -83,12 +77,11 @@
     ],
     "filters": [
       {
-        "id": "related-resource",
+        "id": "resources",
         "components": [
-          "resource"
+          "resource-item"
         ]
       }
     ]
   }
-  
   
