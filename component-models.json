@@ -556,50 +556,6 @@
     ]
   },
   {
-    "id": "related-resources",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "relatedresourceid",
-        "label": "RelatedResourceId"
-      },
-      {
-        "component": "text",
-        "valueType": "text",
-        "name": "heading",
-        "value": "",
-        "label": "Heading"
-      }
-    ]
-  },
-  {
-    "id": "resource",
-    "fields": [
-      {
-        "component": "text",
-        "name": "subheading",
-        "label": "SubHeading"
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Link Text"
-      },
-      {
-        "component": "aem-content",
-        "name": "linkUrl",
-        "label": "Link URL"
-      },
-      {
-        "component": "text",
-        "name": "openInNewtab",
-        "label": "Open in a new tab",
-        "value": "false"
-      }
-    ]
-  },
-  {
     "id": "sciex-footer-new",
     "fields": [
       {

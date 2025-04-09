@@ -62,12 +62,6 @@
     ]
   },
   {
-    "id": "related-resources",
-    "components": [
-      "resource"
-    ]
-  },
-  {
     "id": "sciex-footer",
     "components": [
       "title",
