@@ -7,7 +7,29 @@ export default async function decorate(block) {
   headingDiv.classList.add('heading');
   headingDiv.append(heading);
   blockDiv.append(headingDiv);
-  [...block.children].slice(2, 6).forEach((row) => {
+
+  function createResourceDiv(title, linkText, linkUrl) {
+    const container = document.createElement('div');
+    container.className = 'links-container';
+
+    const titleElement = document.createElement('strong');
+    titleElement.className = 'title-Element';
+    titleElement.textContent = title;
+
+    const linkElement = document.createElement('a');
+    linkElement.className = 'link-Element';
+    linkElement.href = linkUrl;
+    linkElement.textContent = linkText;
+
+    container.appendChild(titleElement);
+    container.appendChild(linkElement);
+
+    return container;
+  }
+
+  const rows = [...block.children].slice(2, 6);
+
+  rows.forEach((row) => {
     const columns = [...row.children];
 
     if (columns.length >= 3) {
@@ -16,20 +38,7 @@ export default async function decorate(block) {
       const linkUrl = columns[2]?.querySelector('a')?.href;
 
       if (title && linkText && linkUrl) {
-        const resourceDiv = document.createElement('div');
-        resourceDiv.classList.add('links-container');
-
-        const titleElement = document.createElement('strong');
-        titleElement.textContent = title;
-        titleElement.classList.add('title-Element');
-
-        const linkElement = document.createElement('a');
-        linkElement.href = linkUrl;
-        linkElement.textContent = linkText;
-        linkElement.classList.add('link-Element');
-
-        resourceDiv.appendChild(titleElement);
-        resourceDiv.appendChild(linkElement);
+        const resourceDiv = createResourceDiv(title, linkText, linkUrl);
         blockDiv.appendChild(resourceDiv);
       }
     }
