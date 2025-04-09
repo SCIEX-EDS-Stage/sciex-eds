@@ -566,42 +566,41 @@
     ]
   },
   {
-    "id": "resources",
+    "id": "related-resources",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
         "name": "heading",
-        "label": "Heading"
+        "label": "Heading",
+        "value": ""
       }
     ]
   },
   {
-    "id": "resource-item",
+    "id": "resource",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
         "name": "subheading",
-        "label": "SubHeading"
+        "label": "SubHeading",
+        "value": ""
       },
       {
         "component": "text",
         "name": "linkText",
-        "label": "Link Text",
-        "valueType": "string"
+        "label": "Link Text"
       },
       {
         "component": "aem-content",
         "name": "linkUrl",
-        "label": "Link URL",
-        "valueType": "string"
+        "label": "Link URL"
       },
       {
         "component": "text",
         "name": "openInNewtab",
         "label": "Open in a new tab",
-        "valueType": "string",
         "value": "false"
       }
     ]
