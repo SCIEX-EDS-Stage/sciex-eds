@@ -26,7 +26,7 @@
       "featured-products",
       "coursecatalog",
       "tabs-nav",
-      "related-resources",
+      "related-resource",
       "button-text",
       "title",
       "tech-note",
@@ -60,6 +60,12 @@
     "id": "header",
     "components": [
       "headerItem"
+    ]
+  },
+  {
+    "id": "related-resource",
+    "components": [
+      "resource"
     ]
   },
   {
