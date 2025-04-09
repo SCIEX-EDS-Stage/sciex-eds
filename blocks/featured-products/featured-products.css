@@ -17,6 +17,8 @@
 
 .featured-products img {
     margin-top: 0; /* Default, will be overridden for mobile */
+    padding-top: 30px;
+    max-width: 90%;
 }
 
 .featured-products li {
