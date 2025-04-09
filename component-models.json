@@ -568,8 +568,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "id",
-        "label": "Id"
+        "name": "relatedresourceid",
+        "label": "RelatedResourceId"
       },
       {
         "component": "text",
@@ -585,8 +585,8 @@
     "fields": [
       {
         "component": "text",
-        "name": "heading",
-        "label": "Heading"
+        "name": "subheading",
+        "label": "SubHeading"
       },
       {
         "component": "text",
