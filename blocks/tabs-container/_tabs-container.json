@@ -23,9 +23,9 @@
       "fields": [
         {
           "component": "text",
-          "name": "id",
+          "name": "containerId",
           "value": "",
-          "label": "Id",
+          "label": "Container Id",
           "valueType": "string"
         }
       ]

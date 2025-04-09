@@ -23,8 +23,8 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "id",
-          "label": "Id"
+          "name": "titleId",
+          "label": "Title Id"
         },
         {
           "component": "richtext",

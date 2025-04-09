@@ -23,8 +23,8 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "id",
-          "label": "Id",
+          "name": "buttonId",
+          "label": "Button Id",
           "value": "button-text"
         },
         {
