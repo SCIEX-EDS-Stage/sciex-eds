@@ -23,8 +23,8 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "id",
-          "label": "Id"
+          "name": "productsId",
+          "label": "Products Id"
         },
         {
           "component": "reference",

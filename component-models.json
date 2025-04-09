@@ -274,8 +274,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "id",
-        "label": "Id",
+        "name": "buttonId",
+        "label": "Button Id",
         "value": "button-text"
       },
       {
@@ -512,8 +512,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "id",
-        "label": "Id"
+        "name": "productsId",
+        "label": "Products Id"
       },
       {
         "component": "reference",
@@ -811,9 +811,9 @@
     "fields": [
       {
         "component": "text",
-        "name": "id",
+        "name": "containerId",
         "value": "",
-        "label": "Id",
+        "label": "Container Id",
         "valueType": "string"
       }
     ]
@@ -831,25 +831,6 @@
       {
         "component": "text",
         "name": "tabId",
-        "value": "",
-        "label": "Id",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "tabItem",
-    "fields": [
-      {
-        "component": "text",
-        "name": "tabname",
-        "value": "",
-        "label": "Tab Name",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "tabid",
         "value": "",
         "label": "Id",
         "valueType": "string"
@@ -944,8 +925,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "id",
-        "label": "Id"
+        "name": "titleId",
+        "label": "Title Id"
       },
       {
         "component": "richtext",
