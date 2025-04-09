@@ -186,6 +186,27 @@ export default async function decorate(block) {
   searchTermDiv.appendChild(searchTermLabel);
   searchTermDiv.appendChild(searchTermValue);
 
+  // Function to create an element with specific classes and text content
+  function createElement(tag, className, id, textContent = '') {
+    const element = document.createElement(tag);
+    element.className = className;
+    element.id = id;
+    if (textContent) {
+      element.textContent = textContent;
+    }
+    return element;
+  }
+
+  const searchTermValidation = createElement('div', 'search-term-validation', 'searchTermValidation');
+
+  const validationText = createElement('div', 'search-validation-text', 'validationText', 'Search within max 20 characters');
+  const validationCount = createElement('div', 'search-validation-count', 'validationCount');
+  const validationError = createElement('div', 'search-validation-error', 'validationError', 'Input exceeds the limit. Please search within 20 characters');
+
+  searchTermValidation.appendChild(validationText);
+  searchTermValidation.appendChild(validationError);
+  searchTermValidation.appendChild(validationCount);
+
   // Create search input
   const searchInput = document.createElement('input');
   searchInput.type = 'text';
@@ -335,6 +356,7 @@ export default async function decorate(block) {
   // Append all sections to the search result section div
   searchResultSectionDiv.appendChild(searchContainerDiv);
   searchResultSectionDiv.appendChild(searchTermDiv);
+  searchResultSectionDiv.appendChild(searchTermValidation);
   searchResultSectionDiv.appendChild(querySortSectionDiv);
   searchResultSectionDiv.appendChild(facetBreadcrumbDiv);
   searchResultSectionDiv.appendChild(coveoResultsLoading);

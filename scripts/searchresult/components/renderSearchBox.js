@@ -10,6 +10,11 @@ const renderSearchBox = (queryText) => {
   const searchTermValue = document.getElementById('searchTermValue');
   const searchTermContainer = document.getElementById('searchTermContainer');
   const clearSearch = document.getElementById('clear-search');
+  const charCountDisplay = document.getElementById('validationCount');
+  const validationError = document.getElementById('validationError');
+  const validationText = document.getElementById('validationText');
+  const searchTermValidation = document.getElementById('searchTermValidation');
+  queryInput.style.outline = 'none'
   searchTermContainer.style.display = 'none';
   clearSearch.style.display = 'none';
   suggestionPopup.style.display = 'none';
@@ -25,7 +30,7 @@ const renderSearchBox = (queryText) => {
     const suggestions = searchBoxController.state.suggestions || [];
 
     const rect = searchBox.getBoundingClientRect();
-    suggestionPopup.style.top = `${rect.bottom + window.scrollY}px`;
+    suggestionPopup.style.top = `${rect.bottom + window.scrollY + 15}px`;
     suggestionPopup.style.left = `${rect.left + window.scrollX}px`;
 
     if (suggestions.length > 0) {
@@ -113,6 +118,7 @@ const renderSearchBox = (queryText) => {
     searchTermValue.innerHTML = event.target.value;
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
       searchTermContainer.style.display = 'block';
+      searchTermValidation.style.display = 'none';
       searchBoxController.submit();
       if (headlessResultsList.state && headlessResultsList.state.results
            && headlessResultsList.state.results.length > 0) {
@@ -126,6 +132,7 @@ const renderSearchBox = (queryText) => {
     }
     if (event.key === 'Backspace') {
       searchTermContainer.style.display = 'none';
+      searchTermValidation.style.display = 'flex';
     }
   });
 
@@ -141,6 +148,26 @@ const renderSearchBox = (queryText) => {
     searchBoxController.clear();
     searchBoxController.submit();
     clearSearch.style.display = 'none';
+    searchTermValidation.style.display = 'flex';
+    charCountDisplay.textContent = 0 + " / 20";
+    validationError.style.display = 'none';
+    validationText.style.display = 'block';
+    queryInput.style.border = "1px solid #C6C6C6";
+  });
+
+  queryInput.addEventListener('input', () => {
+    const charCount = queryInput.value.length;
+    charCountDisplay.textContent = charCount + " / 20";
+    if (charCount === 20) {
+      validationError.style.display = 'block';
+      validationText.style.display = 'none';
+      suggestionPopup.style.display = 'none';
+      queryInput.style.border = "1px solid #B12A28";
+    }else {
+      validationError.style.display = 'none';
+      validationText.style.display = 'block';
+      queryInput.style.border = "1px solid #C6C6C6";
+    }
   });
 };
 export default renderSearchBox;

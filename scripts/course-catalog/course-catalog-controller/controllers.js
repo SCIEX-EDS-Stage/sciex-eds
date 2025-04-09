@@ -78,6 +78,7 @@ function createFacetController() {
     'region',
     'capillaryelectrophoresiscategories',
     'language',
+    'applications'
   ];
   const controllerMap = new Map();
   facetsId.forEach((item) => {

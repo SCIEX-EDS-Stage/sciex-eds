@@ -25,7 +25,30 @@
 
 .search-container {
     justify-content: center;
-    padding: 24px 0px;
+    padding: 24px 0px 0px;
+}
+
+.search-term-validation {
+    color: var(--Grey-500, #707070);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.07px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-validation-error {
+    display: none;
+    color: var(--Validation-Error-900, #B12A28);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.07px;
 }
 
 .search-box {
@@ -48,7 +71,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0px;
+    padding: 20px 0px;
 }
 
 #sort {
@@ -620,7 +643,7 @@
         width: 100%;
     }
     .search-result-section .search-container {
-        padding: 20px 0 !important;
+        padding: 20px 0 0 !important;
     }
     .query-sort-section #sort {
         grid-column: span 2;
