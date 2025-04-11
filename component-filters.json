@@ -30,7 +30,7 @@
       "tech-note",
       "customer-document",
       "survey-script",
-      "related-resources"
+      "sciex-related-resource"
     ]
   },
   {
@@ -61,12 +61,6 @@
     ]
   },
   {
-    "id": "related-resources",
-    "components": [
-      "resource"
-    ]
-  },
-  {
     "id": "sciex-footer",
     "components": [
       "title",
@@ -74,6 +68,12 @@
       "image",
       "icon",
       "links"
+    ]
+  },
+  {
+    "id": "sciex-related-resource",
+    "components": [
+      "resource-item"
     ]
   },
   {

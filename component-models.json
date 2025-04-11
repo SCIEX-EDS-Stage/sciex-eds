@@ -151,6 +151,13 @@
             "name": "enableSurveyScript",
             "label": "Enable Survey Script",
             "value": "false"
+          },
+          {
+            "component": "text",
+            "valueType": "number",
+            "name": "pageTrackingID",
+            "label": "Page Tracking ID",
+            "value": ""
           }
         ]
       }
@@ -276,7 +283,7 @@
         "valueType": "string",
         "name": "buttonId",
         "label": "Button Id",
-        "value": "button-text"
+        "value": ""
       },
       {
         "component": "richtext",
@@ -288,7 +295,7 @@
         "component": "text",
         "name": "buttonText",
         "label": "Primary Button Text",
-        "value": "Download PDF"
+        "value": ""
       },
       {
         "component": "aem-content",
@@ -566,46 +573,6 @@
     ]
   },
   {
-    "id": "related-resources",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "label": "Heading",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "resource",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "subheading",
-        "label": "SubHeading",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Link Text"
-      },
-      {
-        "component": "aem-content",
-        "name": "linkUrl",
-        "label": "Link URL"
-      },
-      {
-        "component": "text",
-        "name": "openInNewtab",
-        "label": "Open in a new tab",
-        "value": "false"
-      }
-    ]
-  },
-  {
     "id": "sciex-footer-new",
     "fields": [
       {
@@ -737,6 +704,56 @@
         "value": "",
         "label": "Link Url",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "sciex-related-resource",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": "Related Resources"
+      }
+    ]
+  },
+  {
+    "id": "resource-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subheading",
+        "label": "SubHeading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "linkUrl",
+        "label": "Link URL"
+      },
+      {
+        "component": "radio-group",
+        "label": "Select below options to open link in new tab?",
+        "name": "selectbelowoption",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
+            "value": "_blank"
+          }
+        ]
       }
     ]
   },
