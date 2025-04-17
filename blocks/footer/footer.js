@@ -195,6 +195,7 @@ function handleBlockSection(child, block, iteration) {
   }
 
   wrapperDiv.append(child);
+  wrapperDiv.append(uniqueId);
   block.append(wrapperDiv);
 }
 
