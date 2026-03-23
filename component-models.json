@@ -542,6 +542,21 @@
     ]
   },
   {
+    "id": "header",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "myProfile",
+        "label": "My Profile Page Path"
+      },
+      {
+        "component": "aem-content",
+        "name": "myFavourite",
+        "label": "My Favourite Page Path"
+      }
+    ]
+  },
+  {
     "id": "headerItem",
     "fields": [
       {
