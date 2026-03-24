@@ -11,13 +11,13 @@ let favoriteResultsList = [];
 
 const USER_API = '/bin/sciex/currentuserdetails';
 const favIconAllowedTags = [
-  "knowledge-base-articles",
-  "tech-notes",
-  "regulatory-docs",
-  "training",
-  "training.sciex.com",
-  "customer-docs",
-  "eula"
+  'knowledge-base-articles',
+  'tech-notes',
+  'regulatory-docs',
+  'training',
+  'training.sciex.com',
+  'customer-docs',
+  'eula',
 ];
 async function checkLoginStatus() {
   try {
@@ -82,7 +82,6 @@ const callFavoriteAPI = async (params) => {
   }
 };
 
-
 export const addToFavorite = (url) => callFavoriteAPI({
   operation: 'add',
   url,
@@ -139,8 +138,8 @@ const renderSearchResults = () => {
           (page) => page.path === result.printableUri,
         ))
         : false;
-       const urlSplit = result.printableUri.split("/");
-       const isItemAllowed = urlSplit.some(segment => favIconAllowedTags.includes(segment));
+      const urlSplit = result.printableUri.split('/');
+      const isItemAllowed = urlSplit.some((segment) => favIconAllowedTags.includes(segment));
 
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
@@ -175,8 +174,8 @@ const renderSearchResults = () => {
       const rating = result?.raw?.rating ?? 0;
       Array.from(stars).slice(0, rating).forEach((star) => star.classList.add('filled'));
       const cleanPrintableUri = result.printableUri?.startsWith('https://training.sciex.com')
-      ? getCleanPrintableUri(result.printableUri)
-      : result.printableUri;
+        ? getCleanPrintableUri(result.printableUri)
+        : result.printableUri;
 
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
@@ -224,11 +223,10 @@ const renderSearchResults = () => {
 
       const favIcon = resultItem.querySelector('.favorite-icon');
       if (isUserLoggedIn && favIcon) {
-      
         if (isFavorite) {
           favIcon.classList.add('favorited');
         }
-        
+
         favIcon.addEventListener('click', async (e) => {
           e.preventDefault();
           e.stopPropagation();

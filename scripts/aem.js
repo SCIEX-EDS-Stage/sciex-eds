@@ -752,7 +752,7 @@ async function sectionBackgroundColor(element) {
     const section = sections[i];
 
     // check for data-color attribute
-    const color = section.dataset.color;
+    const { color } = section.dataset;
 
     if (color) {
       section.classList.add(color);
