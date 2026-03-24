@@ -31,7 +31,7 @@
          "component": "richtext",
           "valueType": "string",
           "name": "linkText",
-          "label": "Text"
+          "label": "Primary Text"
         },
         {
           "component": "text",
@@ -43,7 +43,7 @@
           "component": "aem-content",
           "name": "buttonUrl",
           "label": "primary Button Url",
-          "value": "#"
+          "value": ""
 
         },
         {
@@ -58,8 +58,9 @@
         },
         {
           "component": "text",
-          "name": "buttonTextHow",
-          "label": "Secondary Button Text"
+          "name": "buttonTextSecondary",
+          "label": "Secondary Button Text",
+          "value": ""
         },
         {
           "component": "aem-content",

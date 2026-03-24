@@ -18,11 +18,11 @@ export const courseCatalogSearchBoxController = buildSearchBox(courseCatalogSear
     highlightOptions: {
       notMatchDelimiters: {
         open: '<strong>',
-        close: '</strong>',
+        close: '</strong>&nbsp;',
       },
       correctionDelimiters: {
         open: '<i>',
-        close: '</i>',
+        close: '</i>&nbsp;',
       },
     },
   },
@@ -30,7 +30,7 @@ export const courseCatalogSearchBoxController = buildSearchBox(courseCatalogSear
 
 export const courseCatalogResultsList = buildResultList(courseCatalogSearchEngine, {
   options: {
-    fieldsToInclude: ['description', 'duration', 'levelcategories', 'coursetypecategories', 'isnewcourse'],
+    fieldsToInclude: ['description', 'duration', 'levelcategories', 'coursetypecategories', 'isnewcourse', 'rating'],
   },
 });
 
@@ -69,6 +69,7 @@ function createFacetController() {
     'trainingtopiccategories',
     'techniquescategories',
     'trainingtypecategories',
+    'trainingcoursetype',
     'levelcategories',
     'certificatetypecategories',
     'massspectrometerscategories',

@@ -19,11 +19,11 @@ export const searchBoxController = buildSearchBox(searchEngine, {
     highlightOptions: {
       notMatchDelimiters: {
         open: '<strong>',
-        close: '</strong>',
+        close: '</strong> &nbsp;',
       },
       correctionDelimiters: {
         open: '<i>',
-        close: '</i>',
+        close: '</i> &nbsp;',
       },
     },
   },
@@ -31,7 +31,7 @@ export const searchBoxController = buildSearchBox(searchEngine, {
 
 export const headlessResultsList = buildResultList(searchEngine, {
   options: {
-    fieldsToInclude: ['ogimage', 'description'],
+    fieldsToInclude: ['ogimage', 'description', 'productpartnumber', 'lotnumber', 'kitpartnumber', 'duration', 'levelcategories', 'coursetypecategories', 'isnewcourse', 'rating'],
   },
 });
 
@@ -41,6 +41,15 @@ export const contentTypeFacetController = buildFacet(searchEngine, {
     numberOfValues: 10,
     field: 'contenttype',
     facetId: 'contenttype'
+  },
+});
+
+// Language facets controller
+export const languageFacetController = buildFacet(searchEngine, {
+  options: { 
+    numberOfValues: 10,
+    field: 'language',
+    facetId: 'language'
   },
 });
 
@@ -67,6 +76,9 @@ export const updateSorting = (criterion) => {
 // Context variable controller
 const context = buildContext(searchEngine)
 context.add('host', window.location.origin);
+let lang = document.documentElement.lang
+context.add('locale', lang || 'en');
+
 
 export const facetBreadcrumb = buildBreadcrumbManager(searchEngine)
 
@@ -79,6 +91,7 @@ export  function handleResultClick(results) {
 export const allFacetController = createFacetController();
 
 function createFacetController() {
+  let lang = document.documentElement.lang;
   const facetsId = [
     'coursetypecategories',
     'capillaryelectrophoresiscategories',
@@ -92,15 +105,21 @@ function createFacetController() {
     'techniquescategories',
     'trainingtopiccategories',
     'trainingtypecategories',
+    'trainingcoursetype',
     'assettypes',
     'instrumentfamily',
     'languagecountry',
-    'language',
     'year',
     'location',
     'applications',
-    'technicaldocuments'
+    'technicaldocuments',
+    'productcategories'
   ];
+
+  if (lang !== 'ja' && lang !== 'zh-cn') {
+    facetsId.push('language');
+  }
+
   const controllerMap = new Map();
   facetsId.forEach((item) => {
    const controller = buildFacet(searchEngine, {
@@ -128,26 +147,28 @@ function initDependentFacet(dependentFacet, parentFacets) {
     );
 
   const facetConditionsMap = {
-    'massspectrometerscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library'],
-    'capillaryelectrophoresiscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library'],
-    'hplcandceproductscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library'],
-    'integratedsolutionscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library'],
-    'softwarecategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library'],
-    'standardsandreagentscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library'],
+    'massspectrometerscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library', 'Knowledge base articles' ,'SCIEX How', 'Technical Notes'],
+    'capillaryelectrophoresiscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library', 'Knowledge base articles', 'SCIEX How', 'Technical Notes'],
+    'hplcandceproductscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library', 'Knowledge base articles', 'SCIEX How', 'Technical Notes'],
+    'integratedsolutionscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library', 'Knowledge base articles', 'SCIEX How', 'Technical Notes'],
+    'softwarecategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library', 'Knowledge base articles', 'SCIEX How', 'Technical Notes'],
+    'standardsandreagentscategories': ['Products and services', 'Resource Library', 'Customer documents', 'Training', 'Resource library' ,'Knowledge base articles', 'SCIEX How', 'Technical Notes'],
     'levelcategories': ['Training'],
     'techniquescategories': ['Training'],
     'trainingtopiccategories': ['Training'],
     'trainingtypecategories': ['Training'],
+    'trainingcoursetype': ['Training'],
     'assettypes': ['Resource library', 'Customer documents'],
     'instrumentfamily': ['Regulatory documents'],
     'languagecountry': ['Regulatory documents'],
-    'language': ['Customer documents', 'Training', 'Resource library'],
+    'language': ['Customer documents', 'Training', 'Resource library', 'Knowledge base articles', 'SCIEX How', 'Technical Notes'],
     'year': ['Customer documents', 'Regulatory documents'],
     'location': ['Training'],
-    'applications': ['Applications', 'Resource library'],
+    'applications': ['Applications', 'Resource library', 'Knowledge base articles', 'SCIEX How', 'Technical Notes'],
     'technicaldocuments': ['Regulatory documents'],
     'certificatetypecategories': ['Training'],
-    'coursetypecategories': ['Training']
+    'coursetypecategories': ['Training'],
+    'productcategories': ['binarydata', 'eCommerce']
   };
 
   const facetId = dependentFacet.state.facetId;
