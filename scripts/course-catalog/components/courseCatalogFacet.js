@@ -124,7 +124,7 @@ function renderFacet(facetElementId, facetController, headerText) {
     const facetInput = document.createElement('input');
     facetInput.type = 'text';
     facetInput.id = `${facetId}-input`;
-    facetInput.maxLength = 20;
+    facetInput.maxLength = 200;
     facetInput.classList.add(
       'tw-border',
       'tw-p-2',
@@ -367,6 +367,7 @@ export function renderCourseCatalogFacet() {
     trainingtopiccategories: 'Training topic',
     techniquescategories: 'Training Techniques',
     trainingtypecategories: 'Training type',
+    'trainingcoursetype': 'Training course type',
     levelcategories: 'Training Level',
     certificatetypecategories: 'Certificate type',
     massspectrometerscategories: 'Mass spectrometry',
@@ -393,11 +394,12 @@ export function renderCourseCatalogFacet() {
   }
   const desiredOrder = [
     'language-facet',
+    'trainingtypecategories-facet',
+    'trainingcoursetype-facet',
+    'typecategories-facet',
     'region-facet',
     'trainingtopiccategories-facet',
     'techniquescategories-facet',
-    'trainingtypecategories-facet',
-    'typecategories-facet',
     'levelcategories-facet',
     'certificatetypecategories-facet',
     'massspectrometerscategories-facet',

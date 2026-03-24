@@ -73,6 +73,7 @@ function handleMiddleSections(child, block, iteration) {
         const a = document.createElement('a');
         a.classList.add('footer-link');
         a.href = link.href;
+        a.title = link.textContent;
         a.textContent = link.textContent;
 
         li.appendChild(a);
@@ -87,6 +88,7 @@ function handleMiddleSections(child, block, iteration) {
       if (paragraphWithImage) {
         const anchor = document.createElement('a');
         anchor.href = 'https://lifesciences.danaher.com';
+        anchor.title = 'https://lifesciences.danaher.com';
         anchor.target = '_blank';
         anchor.appendChild(paragraphWithImage.cloneNode(true));
         newContainer.appendChild(anchor);
@@ -173,6 +175,12 @@ function handleBlockSection(child, block, iteration) {
   const uniqueId = getMetadata('pagetrackingid');
   const paragraphs = child.querySelectorAll('p');
 
+  // ✅ Add ot-sdk-show-settings to "Cookies Settings" link
+  const cookieLink = child.querySelector('a[title="Cookies Settings"]');
+  if (cookieLink) {
+    cookieLink.classList.add('ot-sdk-show-settings');
+  }
+
   if (paragraphs.length >= 2) {
     const secondLastParagraph = paragraphs[paragraphs.length - 2];
     const lastParagraph = paragraphs[paragraphs.length - 1];
@@ -195,7 +203,6 @@ function handleBlockSection(child, block, iteration) {
   }
 
   wrapperDiv.append(child);
-  wrapperDiv.append(uniqueId);
   block.append(wrapperDiv);
 }
 
@@ -274,6 +281,7 @@ function createSocialLinks() {
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = platform.url;
+    a.title = platform.name;
     a.setAttribute('aria-label', platform.name);
     a.innerHTML = platform.svg;
     li.appendChild(a);
@@ -287,6 +295,7 @@ function createSocialLinks() {
 // function to  add country flag before name
 function addCountryFlag(countryCode) {
   const countryIcon = document.createElement('img');
+  countryIcon.alt = countryCode;
   countryIcon.src = `/icons/${countryCode}.svg`;
   return countryIcon;
 }
@@ -526,10 +535,19 @@ function processFragment(block, fragment) {
 }
 
 export default async function decorate(block) {
+  const { lang } = document.documentElement;
+  let path = '/footer';
+  if (lang === 'en') {
+    path = '/footer';
+  } else if (lang === 'ja') {
+    path = '/ja-jp/footer';
+  } else if (lang === 'zh-cn') {
+    path = '/zh-cn/footer';
+  }
   const footerMeta = getMetadata('footer');
   const footerPath = footerMeta
     ? new URL(footerMeta, window.location).pathname
-    : '/footer';
+    : path;
   const fragment = await loadFragment(footerPath);
   block.textContent = '';
   processFragment(block, fragment);

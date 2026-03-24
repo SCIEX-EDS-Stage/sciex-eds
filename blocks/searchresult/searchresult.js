@@ -1,4 +1,4 @@
-import {} from '../../scripts/aem.js';
+import { getMetadata } from '../../scripts/aem.js';
 // eslint-disable-next-line
 import { loadQueryActions, loadFacetSetActions } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
 import { searchEngine } from '../../scripts/searchresult/engine.js';
@@ -13,8 +13,13 @@ import renderQuerySummary from '../../scripts/searchresult/components/querySumma
 import renderSorting from '../../scripts/searchresult/components/sorting.js';
 import { renderFacetBreadcurm, handleClearMobileFilters } from '../../scripts/searchresult/components/facetBreadcrumb.js';
 import { contentTypeFacetController } from '../../scripts/searchresult/controller/controllers.js';
+import { i18n } from '../../scripts/translation.js';
+import { setSearchSurveyCookie, qualtricsFeedback } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
+  const lang = document.documentElement.lang || 'en';
+  const strings = i18n[lang] || i18n.en;
+
   // Create main container div
   const searchResultDiv = document.createElement('div');
   searchResultDiv.classList.add('tw', 'search-result', 'tw-bg-white');
@@ -80,7 +85,7 @@ export default async function decorate(block) {
   );
   // mobile filter clear Button
   const mobileFilterFooterClearButton = document.createElement('button');
-  mobileFilterFooterClearButton.textContent = 'Clear All';
+  mobileFilterFooterClearButton.textContent = strings.clearAll;
   mobileFilterFooterClearButton.id = 'mobile-filter-footer-clear-all';
   mobileFilterFooterClearButton.addEventListener('click', handleClearMobileFilters);
 
@@ -199,9 +204,9 @@ export default async function decorate(block) {
 
   const searchTermValidation = createElement('div', 'search-term-validation', 'searchTermValidation');
 
-  const validationText = createElement('div', 'search-validation-text', 'validationText', 'Search within max 20 characters');
+  const validationText = createElement('div', 'search-validation-text', 'validationText', strings.limitText);
   const validationCount = createElement('div', 'search-validation-count', 'validationCount');
-  const validationError = createElement('div', 'search-validation-error', 'validationError', 'Input exceeds the limit. Please search within 20 characters');
+  const validationError = createElement('div', 'search-validation-error', 'validationError', strings.validationText);
 
   searchTermValidation.appendChild(validationText);
   searchTermValidation.appendChild(validationError);
@@ -211,8 +216,8 @@ export default async function decorate(block) {
   const searchInput = document.createElement('input');
   searchInput.type = 'text';
   searchInput.id = 'coveo-query';
-  searchInput.placeholder = 'Search...';
-  searchInput.maxLength = 20;
+  searchInput.placeholder = strings.search;
+  searchInput.maxLength = 200;
   searchInput.classList.add(
     'search-box',
     'tw-w-full',
@@ -298,7 +303,7 @@ export default async function decorate(block) {
   const coveoResultsLoading = document.createElement('div');
   coveoResultsLoading.id = 'coveo-results-loading';
   coveoResultsLoading.className = 'result-loading-section tw-text-center tw-text-2xl';
-  coveoResultsLoading.textContent = 'Loading Results...';
+  coveoResultsLoading.textContent = strings.loading;
 
   // Create results section div
   const coveoNoResultsDiv = document.createElement('div');
@@ -324,16 +329,23 @@ export default async function decorate(block) {
         lifeSciencesDiv.appendChild(section.querySelector('div'));
         block.append(lifeSciencesDiv);
       } else if (iteration === 2) {
-        if (main.querySelector('picture')) {
-          coveoNoResultsDiv.appendChild(main.querySelector('picture'));
+        if (section.querySelector('picture')) {
+          coveoNoResultsDiv.appendChild(section.querySelector('picture'));
         }
       } else if (iteration === 3) {
+        if (section.querySelector('div')) {
+          const altText = section.querySelector('div').textContent.trim();
+          if (coveoNoResultsDiv.querySelector('img')) {
+            coveoNoResultsDiv.querySelector('img').setAttribute('alt', altText);
+          }
+        }
+      } else if (iteration === 4) {
         const noResultsText1 = section.querySelector('div');
         noResultsText1.id = 'noresults-text1';
         noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
         noResultsText.appendChild(noResultsText1);
         coveoNoResultsDiv.appendChild(noResultsText);
-      } else if (iteration === 4) {
+      } else if (iteration === 5) {
         const noResultsText2 = section.querySelector('div');
         noResultsText2.classList = 'noresults-text2';
         noResultsText.appendChild(noResultsText2);
@@ -391,6 +403,10 @@ export default async function decorate(block) {
       const params = new URLSearchParams(pageUrl.search);
       query = params.get('term');
       const contentType = params.get('contentType');
+      const facetId = params.get('facetId');
+      console.log('facetId>>', facetId);
+      const value = params.get('value');
+      console.log('value>>', value);
       const { updateQuery } = loadQueryActions(searchEngine);
       const { toggleSelectFacetValue } = loadFacetSetActions(searchEngine);
       searchEngine.dispatch(updateQuery({
@@ -401,7 +417,23 @@ export default async function decorate(block) {
           facetId: 'contenttype',
           selection: { value: contentType, state: 'selected' },
         }));
-        contentTypeFacetController.showMoreValues();
+        if (facetId) {
+          searchEngine.dispatch(toggleSelectFacetValue({
+            facetId,
+            selection: { value, state: 'selected' },
+          }));
+        }
+      }/* else{
+         searchEngine.dispatch(toggleSelectFacetValue({
+          facetId: 'contenttype',
+          selection: { value: 'Applications', state: 'idle' },
+        }));
+      } */
+      contentTypeFacetController.showMoreValues();
+      const enableSiteInterceptScript = getMetadata('enablesiteinterceptscript');
+      if (enableSiteInterceptScript && enableSiteInterceptScript === 'true') {
+        setSearchSurveyCookie();
+        qualtricsFeedback();
       }
     }
     renderSearchBox(query);

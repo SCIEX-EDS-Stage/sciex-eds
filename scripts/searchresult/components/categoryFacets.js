@@ -1,10 +1,13 @@
 /* eslint-disable */
-import {contentTypeFacetController, allFacetController, facetBreadcrumb } from "../controller/controllers.js";
+import {contentTypeFacetController, allFacetController, facetBreadcrumb, languageFacetController } from "../controller/controllers.js";
+import { i18n } from "../../translation.js";
+
+const lang = document.documentElement.lang || 'en';
+const strings = i18n[lang] || i18n.en;
 
 function facetAccordion(values, facetElement, facetItemsContainer) {
   if (values.length !== 0) {
     facetElement.appendChild(facetItemsContainer);
-
     const facetHeader = facetElement.querySelector(".facet-header");
     facetHeader.setAttribute("aria-expanded", "false");
 
@@ -37,10 +40,10 @@ function createToggleButtons(facetItemsContainer, facetController) {
   buttonContainer.classList.add("facet-toggle-buttons"); // Optional class for styling
 
   const buttons = {
-    showMore: createButton("Show More", "show-more-btn", () =>
+    showMore: createButton(strings.showMore, "show-more-btn", () =>
       toggleValues(true)
     ),
-    showLess: createButton("Show Less", "show-less-btn", () =>
+    showLess: createButton(strings.showLess, "show-less-btn", () =>
       toggleValues(false)
     ),
   };
@@ -128,7 +131,7 @@ function renderFacet(facetElementId, facetController, headerText) {
     facetInputElement.type = 'text';
     facetInputElement.id = facetId + '-input';
     facetInputElement.classList.add('tw-border', 'tw-p-2', 'tw-rounded-lg', 'tw-mt-2', 'facet-search-box');
-    facetInputElement.placeholder = 'Search...';
+    facetInputElement.placeholder = strings.search;
     facetInputElement.value = previousInputValue;
 
     facetInputElement.addEventListener('input', function (event) {
@@ -180,11 +183,15 @@ function renderFacet(facetElementId, facetController, headerText) {
     values.forEach(value => {
       if (facetId === 'applications' && value.value === 'Application') return;
 
+      let displayText = value.value
+      if(value.value === 'binarydata'){
+        displayText = "eCommerce"
+      }
       const facetItem = document.createElement('div');
       facetItem.className = 'facet-item tw-flex tw-items-center tw-gap-2 tw-py-1';
       facetItem.innerHTML = `        
         <input type="checkbox" id="${value.value}" ${value.state === "selected" ? "checked" : ""} class="tw-accent-blue-500 tw-w-4 tw-h-4">
-        <label for="${value.value}">${value.value} (${value.numberOfResults})</label>
+        <label for="${value.value}">${displayText} (${value.numberOfResults})</label>
       `;
 
       facetItem.querySelector("input").addEventListener("change", () => {
@@ -214,7 +221,7 @@ function renderFacet(facetElementId, facetController, headerText) {
     }
     
     clearFacetFilter(facetElement, facetController);
-    orderContentTypeFacets(facetId, facetItemsContainer);
+    //orderContentTypeFacets(facetId, facetItemsContainer);
     facetAccordion(values, facetElement, facetItemsContainer);
     createToggleButtons(facetItemsContainer, facetController);
   }
@@ -237,7 +244,7 @@ function clearFacetFilter(facetElement,facetController){
     const clearButton = document.createElement('button');
     clearButton.style.marginLeft = '0';
     clearButton.style.marginRight = '10px';
-    clearButton.textContent = 'Clear Filter';
+    clearButton.textContent = strings.clearFilter;
   
     const clearIcon = document.createElement('span');
     clearIcon.innerHTML = '&#10005;';
@@ -266,6 +273,7 @@ function renderSearchFacets(facetController, facetItemsContainer,facetElement,se
   let isSearch=false;
     if (Array.isArray(searchresult) && searchresult.length > 0) {
       searchresult.forEach((value) => {
+        console.log('Rendering search facet value:', value);
         const displayText = value.displayValue || value.value;
         const displaycount = value.count || value.numberOfResults;
         const item = document.createElement("div");
@@ -295,16 +303,13 @@ function renderSearchFacets(facetController, facetItemsContainer,facetElement,se
   function orderFacetChildren(facetElementId, desiredOrder) {
     const facetElement = document.getElementById(facetElementId);
     if (!facetElement) {
-      console.error("Facet element not found for ID:", facetElementId);
       return;
     }
   
     requestAnimationFrame(() => {
       const facetChildren = Array.from(facetElement.children);
-      console.log("facetChildren after rendering:", facetChildren);
   
       if (facetChildren.length === 0) {
-        console.warn("No facet children found after render. Check if facets are rendered correctly.");
         return;
       }
   
@@ -319,7 +324,6 @@ function renderSearchFacets(facetController, facetItemsContainer,facetElement,se
         return indexA - indexB;
       });
   
-      console.log("facetChildren after sorting:", facetChildren);
   
       facetChildren.forEach(child => {
         facetElement.appendChild(child);
@@ -374,6 +378,7 @@ function orderFacetBasedOnSelection(selectedValue) {
       'trainingtopiccategories-facet',
       'techniquescategories-facet',
       'trainingtypecategories-facet',
+      'trainingcoursetype-facet',
       'levelcategories-facet',
       'certificatetypecategories-facet',
       'language-facet',
@@ -410,7 +415,8 @@ function orderContentTypeFacets(facetId,facetItemsContainer){
         "Regulatory documents",
         "Customer documents",
         "Resource library",
-        "Training"
+        "Training",
+        "binarydata"
     ];
 
     const facetContainer = facetItemsContainer;
@@ -418,6 +424,7 @@ function orderContentTypeFacets(facetId,facetItemsContainer){
     const facetItems = facetContainer.querySelectorAll('.facet-item');
 
     const facetItemsArray = Array.from(facetItems).map(item => {
+        console.log('Ordering facet item:', item);
         const label = item.querySelector('label').innerText.replace(/\s\(\d+\)$/, '');
         return { label, item };
     });
@@ -468,31 +475,43 @@ function createFacetDiv(id) {
   } 
 }
 
-export function callCreateFacet(){
-  createFacetRender(contentTypeFacetController, "contenttype", "Content type");
+export function callCreateFacet() {
+  createFacetRender(contentTypeFacetController, "contenttype", strings.contentType);
+
+  let lang = document.documentElement.lang;
+
+  if (lang === 'ja' || lang === 'zh-cn') {
+    createFacetRender(languageFacetController, "language", strings.language);
+  }
   const facetController = allFacetController;
+
   const facetsId = {
-    'coursetypecategories':'Course type',
-    'certificatetypecategories':'Certificate type',
-    'capillaryelectrophoresiscategories':'Capillary electrophoresis',
-    'hplcandceproductscategories':'Liquid chromoatography',
-    'integratedsolutionscategories':'Integrated solutions',
-    'levelcategories':'Level',
-    'massspectrometerscategories':'Mass spectrometry',
-    'softwarecategories':'Software',
-    'standardsandreagentscategories':'Standards and reagent kits',
-    'techniquescategories':'Techniques',
-    'trainingtopiccategories':'Training topic',
-    'trainingtypecategories':'Training type',
-    'assettypes': 'Asset type',
-    'languagecountry': 'Language country',
-    'language' : 'Language',
-    'year': 'Year',
-    'location': 'Training location',
-    'applications': 'Applications',
-    'technicaldocuments': 'Technical documents',
-    'instrumentfamily': 'Instrument family'
+    'coursetypecategories': strings.courseType,
+    'certificatetypecategories': strings.certificateType,
+    'capillaryelectrophoresiscategories': strings.capillaryElectrophoresis,
+    'hplcandceproductscategories': strings.liquidChromoatography,
+    'integratedsolutionscategories': strings.integratedSolutions,
+    'levelcategories': strings.level,
+    'massspectrometerscategories': strings.massSpectrometry,
+    'softwarecategories': strings.software,
+    'standardsandreagentscategories': strings.standardsAndReagentKits,
+    'techniquescategories': strings.techniques,
+    'trainingtopiccategories': strings.trainingTopic,
+    'trainingtypecategories': strings.trainingType,
+    'trainingcoursetype': strings.trainingCourseType,
+    'assettypes': strings.assetType,
+    'languagecountry': strings.languageCountry,
+    'year': strings.year,
+    'location': strings.trainingLocation,
+    'applications': strings.applications,
+    'technicaldocuments': strings.technicalDocuments,
+    'instrumentfamily': strings.instrumentFamily,
+    'productcategories': strings.products
   };
+
+  if (lang !== 'ja' && lang !== 'zh-cn') {
+    facetsId['language'] = strings.language;
+  }
 
   for (let item in facetsId) {
     const val = facetController.get(item);
@@ -502,10 +521,10 @@ export function callCreateFacet(){
         elementToRemove.remove();
       }
     }
-    if(val.state.values.length){
-      createFacetRender(val,item,facetsId[item]);
+    if (val.state.values.length) {
+      createFacetRender(val, item, facetsId[item]);
     }
-  };
+  }
 }
 
 export const handleMobileFilters = () => {

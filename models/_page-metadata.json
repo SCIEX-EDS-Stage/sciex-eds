@@ -55,6 +55,15 @@
               "value": ""
             },
             {
+              "component": "date-time",
+              "valueType": "date-time",
+              "name": "eventDate",
+              "label": "Event Date",
+              "displayFormat": "YYYY-MM-DD",
+              "valueFormat": null,
+              "value": ""
+            },
+            {
               "component": "aem-tag",
               "valueType": "string",
               "name": "pageTags",
@@ -121,27 +130,6 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "gtmSiteVerif",
-              "label": "GTM: Google Site Verification",
-              "value": "default Google Site Verification"
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "gtmTrackingScript",
-              "label": "GTM: Tracking Script",
-              "value": "default Tracking Script"
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "fathomScript",
-              "label": "Fathom Script",
-              "value": "default Fathom Script"
-            },
-            {
-              "component": "text",
-              "valueType": "string",
               "name": "enableSiteInterceptScript",
               "label": "Enable Site Intercept Script",
               "value": "false"
@@ -159,7 +147,7 @@
               "name": "pageTrackingID",
               "label": "Page Tracking ID",
               "value": ""
-            }               
+            }         
           ]
         }
       ]

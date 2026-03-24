@@ -29,6 +29,37 @@
               "value": "highlight"
             }
           ]
+        },
+        {
+          "component": "text",
+          "name": "tabName",
+          "value": "",
+          "label": "Provide Tab Name",
+          "description": "Provide a name for the tab (Applicable only when Tabs block is added)",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "color",
+          "label": "Select background color",
+          "options": [
+            {
+              "name": "Black",
+              "value": "text-black-background"
+            },
+            {
+              "name": "White",
+              "value": "text-white-background"
+            },
+            {
+              "name": "Gray",
+              "value": "text-grey-background"
+            },
+            {
+              "name": "Blue",
+              "value": "text-blue-background"
+            }
+          ]
         }
       ]
     }
@@ -59,7 +90,45 @@
         "tech-note",
         "customer-document",
         "survey-script",
-        "sciex-related-resource"
+        "sciex-related-resource",
+        "tabs-nav",
+        "tabs-container",
+        "sciex-text",
+        "events",
+        "hero-banner",
+        "events-container",
+        "session-timeline",
+        "events-details",
+        "speakers",
+        "events-register-form",
+        "sciex-buttons",
+        "split-video-text",
+        "regulatory-document",
+        "resource-library",
+        "hero-small",
+        "text-container",
+        "switch-tabs",
+        "table",
+        "icon-card",
+        "resources-grid",
+        "stat-list",
+        "accordion",
+        "speaker",
+        "sciex-tabs",
+        "atomic-media",
+        "sciex-container",
+        "sciex-table",
+        "chat-bot",
+        "sciex-favorite",
+        "cards",
+        "resourcehub-search",
+        "categories",
+        "featured-key-workflows",
+        "cta-with-text",
+        "favorite-all",
+        "contact-information",
+         "sciex-headquarters",
+         "image-varient"
       ]
     }
   ]

@@ -1,0 +1,55 @@
+{
+  "definitions": [
+    {
+      "title": "Speaker",
+      "id": "speaker-details",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Speaker",
+              "model": "speaker-details"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "speaker-details",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "id",
+          "label": "Id(speakers)"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+  ]
+}

@@ -30,13 +30,76 @@
       "tech-note",
       "customer-document",
       "survey-script",
-      "sciex-related-resource"
+      "sciex-related-resource",
+      "tabs-nav",
+      "tabs-container",
+      "sciex-text",
+      "events",
+      "hero-banner",
+      "events-container",
+      "session-timeline",
+      "events-details",
+      "speakers",
+      "events-register-form",
+      "sciex-buttons",
+      "split-video-text",
+      "regulatory-document",
+      "resource-library",
+      "hero-small",
+      "text-container",
+      "switch-tabs",
+      "table",
+      "icon-card",
+      "resources-grid",
+      "stat-list",
+      "accordion",
+      "speaker",
+      "sciex-tabs",
+      "atomic-media",
+      "sciex-container",
+      "sciex-table",
+      "chat-bot",
+      "sciex-favorite",
+      "cards",
+      "resourcehub-search",
+      "categories",
+      "featured-key-workflows",
+      "cta-with-text",
+      "favorite-all",
+      "contact-information",
+      "sciex-headquarters",
+      "image-varient"
     ]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
+    "id": "atomic-media",
+    "components": [
+      "image-video",
+      "vimeo-item",
+      "youtube-item"
+    ]
+  },
+  {
+    "id": "auth-callback",
+    "components": []
   },
   {
     "id": "cards",
     "components": [
-      "card"
+      "image-video",
+      "youtube-item"
+    ]
+  },
+  {
+    "id": "categories",
+    "components": [
+      "category"
     ]
   },
   {
@@ -51,13 +114,63 @@
       "text",
       "image",
       "button",
-      "title"
+      "title",
+      "accordion",
+      "cards"
+    ]
+  },
+  {
+    "id": "events-container",
+    "components": [
+      "sciex-text",
+      "session-timeline",
+      "speaker-details",
+      "events-details",
+      "events-register-form"
+    ]
+  },
+  {
+    "id": "featured-key-workflows",
+    "components": [
+      "workflow-item"
     ]
   },
   {
     "id": "header",
     "components": [
       "headerItem"
+    ]
+  },
+  {
+    "id": "hero-small",
+    "components": [
+      "hero-image",
+      "colour",
+      "video"
+    ]
+  },
+  {
+    "id": "icon-card",
+    "components": [
+      "icon-card-item"
+    ]
+  },
+  {
+    "id": "resources-grid",
+    "components": [
+      "resources-grid-item"
+    ]
+  },
+  {
+    "id": "sciex-buttons",
+    "components": [
+      "sciex-button"
+    ]
+  },
+  {
+    "id": "sciex-container",
+    "components": [
+      "container-item"
     ]
   },
   {
@@ -71,15 +184,88 @@
     ]
   },
   {
+    "id": "sciex-headquarters",
+    "components": [
+      "sciex-headquarters-item"
+    ]
+  },
+  {
     "id": "sciex-related-resource",
     "components": [
       "resource-item"
     ]
   },
   {
+    "id": "sciex-table",
+    "components": [
+      "table-row"
+    ]
+  },
+  {
+    "id": "table-2-columns",
+    "components": [
+      "table-col-2"
+    ]
+  },
+  {
+    "id": "table-3-columns",
+    "components": [
+      "table-col-3"
+    ]
+  },
+  {
+    "id": "table-4-columns",
+    "components": [
+      "table-col-4"
+    ]
+  },
+  {
+    "id": "table-5-columns",
+    "components": [
+      "table-col-5"
+    ]
+  },
+  {
+    "id": "table-6-columns",
+    "components": [
+      "table-col-6"
+    ]
+  },
+  {
+    "id": "table-7-columns",
+    "components": [
+      "table-col-7"
+    ]
+  },
+  {
+    "id": "speakers",
+    "components": [
+      "speaker-details"
+    ]
+  },
+  {
+    "id": "split-video-text",
+    "components": [
+      "video-text",
+      "youtube-video-text"
+    ]
+  },
+  {
+    "id": "stat-list",
+    "components": [
+      "stat-list-item"
+    ]
+  },
+  {
+    "id": "switch-tabs",
+    "components": [
+      "tab-item"
+    ]
+  },
+  {
     "id": "tabs-container",
     "components": [
-      "title",
+      "sciex-text",
       "tech-note"
     ]
   },
@@ -87,6 +273,12 @@
     "id": "tabs-nav",
     "components": [
       "tab"
+    ]
+  },
+  {
+    "id": "text-container",
+    "components": [
+      "column-text"
     ]
   }
 ]

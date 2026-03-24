@@ -9,6 +9,7 @@ import {
   waitForFirstImage,
   loadSection,
   loadSections,
+  sectionBackgroundColor,
   loadCSS,
   toClassName,
   getMetadata,
@@ -59,6 +60,36 @@ export function moveInstrumentation(from, to) {
       .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-')),
   );
 }
+
+export const applyClasses = (element, classes) => element?.classList.add(...classes.split(' '));
+
+/* Start Search survey script */
+/* eslint-disable */
+export function setSearchSurveyCookie() {
+  const searchcookieValue = getCookie('searchSurvey');
+  if (searchcookieValue !== 'visited') {
+    window.showSearchSurvey = 'true';
+    const d = new Date();
+    d.setTime(d.getTime() + (6 * 60 * 60 * 1000));
+    const expires = `expires=${d.toUTCString()}`;
+    document.cookie = `searchSurvey=visited;secure=true;path=/;${expires}`;
+  }
+}
+
+export function qualtricsFeedback() {
+  (function () {
+    const g = function (e, h, f, g) {
+      this.get = function (a) { for (var a = `${a}=`, c = document.cookie.split(';'), b = 0, e = c.length; b < e; b++) { for (var d = c[b]; d.charAt(0) == ' ';)d = d.substring(1, d.length); if (d.indexOf(a) == 0) return d.substring(a.length, d.length); } return null; };
+      this.set = function (a, c) { var b = ''; var b = new Date(); b.setTime(b.getTime() + 6048E5); b = `; expires=${b.toGMTString()}`; document.cookie = `${a}=${c}${b}; path=/; `; };
+      this.check = function () { let a = this.get(f); if (a)a = a.split(':'); else if (e != 100)h == 'v' && (e = Math.random() >= e / 100 ? 0 : 100), a = [h, e, 0], this.set(f, a.join(':')); else return !0; let c = a[1]; if (c == 100) return !0; switch (a[0]) { case 'v': return !1; case 'r': return c = a[2] % Math.floor(100 / c), a[2]++, this.set(f, a.join(':')), !c; } return !0; };
+      this.go = function () { if (this.check()) { const a = document.createElement('script'); a.type = 'text/javascript'; a.src = g; document.body && document.body.appendChild(a); } };
+      this.start = function () { const t = this; document.readyState !== 'complete' ? window.addEventListener ? window.addEventListener('load', () => { t.go(); }, !1) : window.attachEvent && window.attachEvent('onload', () => { t.go(); }) : t.go(); };
+    };
+    try { (new g(100, 'r', 'QSI_S_ZN_b4z8pJnZ6X9z32B', 'https://znb4z8pjnz6x9z32b-sciex.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_b4z8pJnZ6X9z32B')).start(); } catch (i) {}
+  }());
+}
+/* eslint-enable */
+/* End Search survey script */
 
 /**
  * load fonts.css and set a session storage flag
@@ -124,7 +155,14 @@ async function decorateTemplates(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  const domain = window.location.hostname;
+  let lang = 'en';
+  if (domain === 'devcs.sciex.com.cn') {
+    lang = 'zh-cn';
+  } else if (domain === 'devcs.sciex.jp') {
+    lang = 'ja';
+  }
+  document.documentElement.lang = lang;
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
@@ -151,6 +189,7 @@ async function loadEager(doc) {
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
+  await sectionBackgroundColor(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
@@ -173,26 +212,10 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
-const gtmtrackingscript = getMetadata('gtmtrackingscript');
-
-/**
- * Dynamically injects the Google Tag Manager (GTM) script if gtmtrackingscript is valid.
- */
-function loadGTM() {
-  if (typeof gtmtrackingscript !== 'string' || !gtmtrackingscript.includes('googletagmanager.com/gtm.js')) {
-    return;
-  }
-  const script = document.createElement('script');
-  script.innerHTML = gtmtrackingscript;
-  document.head.appendChild(script);
-}
 /**
  * Loads the page and initializes scripts.
  */
 async function loadPage() {
-  if (getCookie('cq-authoring-mode') !== 'TOUCH') {
-    loadGTM();
-  }
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
