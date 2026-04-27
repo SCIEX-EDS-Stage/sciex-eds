@@ -1519,12 +1519,11 @@ export default async function decorate(block) {
   decorateIcons(block);
 
   document.getElementById('logout').addEventListener('click', () => {
-    const redirectUrl = encodeURIComponent(window.location.href);
     fetch('/bin/sciex/logout')
       .then((response) => response)
       .catch(() => {})
       .finally(() => {
-        document.location = `/bin/sciex/logout`;
+        document.location = '/bin/sciex/logout';
       });
   });
 
