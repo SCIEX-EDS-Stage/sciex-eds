@@ -69,6 +69,7 @@ export default function decorate(block) {
   const bannerImg = block.querySelector('picture > img');
   const heading = block.querySelector('h5');
   const description = heading?.nextElementSibling;
+  const containerID = block.children[0]?.textContent?.trim();
   const timeText = block.children[5]?.textContent?.trim();
 
   const buttonContainer = block.querySelector('.button-container');
@@ -215,5 +216,7 @@ export default function decorate(block) {
 
   /* Final card assembly */
   eventCard.append(imageContainer, overlayWrapper, contentContainer);
+  block.id = `${containerID}-content`;
+  block.parentElement.classList.add('tabs-container-wrapper');
   block.append(eventCard);
 }

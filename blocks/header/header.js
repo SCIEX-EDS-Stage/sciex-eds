@@ -5,6 +5,320 @@ import { decorateIcons } from '../../scripts/aem.js';
 import { standaloneSearchBoxController } from '../../scripts/header-search/headerSearchController.js';
 
 const menuLinks = {};
+// Keep dropdown references per anchor without mutating DOM nodes
+const dropdownMap = new WeakMap();
+/* function handleSignInClick(e) {
+  e.preventDefault();
+  login();
+} */
+/** ********
+     *
+     *
+     *
+      function to check if mobile actions can be performed
+     *
+     *
+     *
+     *  */
+function canMobileActions() {
+  const screenWidth = window.innerWidth;
+  if (screenWidth > 1024) {
+    return false;
+  }
+  return true;
+}
+async function getUserDetails() {
+  try {
+    const response = await fetch('/bin/sciex/currentuserdetails', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    return null;
+  }
+}
+const HISTORY_KEY = 'searchHistory';
+function getSearchHistory() {
+  return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+}
+
+function saveQueryToLocalHistory(query) {
+  let history = getSearchHistory();
+  if (!history.includes(query)) {
+    history.unshift(query);
+    history = history.slice(0, 5); // Keep max 5 items
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  }
+}
+const showSuggestions = (selectedContentType, showHistoryOnly = false) => {
+  const suggestionPopup = document.getElementById('global-suggestion-popup');
+  const searchBox = document.getElementById('standalone-search-box');
+  const suggestions = standaloneSearchBoxController.state.suggestions || [];
+  const history = getSearchHistory();
+
+  const rect = searchBox.getBoundingClientRect();
+  suggestionPopup.style.top = `${rect.bottom + window.scrollY}px`;
+  suggestionPopup.style.left = `${rect.left + window.scrollX}px`;
+
+  const shouldShowSuggestions = showHistoryOnly && suggestions.length > 0;
+  const shouldShowHistory = history.length > 0;
+
+  if (shouldShowSuggestions || shouldShowHistory) {
+    let html = '';
+
+    if (shouldShowHistory) {
+      html += '<div style="padding: 8px; font-weight: 330; font-size: 14px; color: #8A8A8A;">Search History</div>';
+      html += history
+        .map((query) => `
+          <div class="global-history-item" style="padding: 8px; cursor: pointer;" data-query="${query}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <g clip-path="url(#clip0_746_95421)">
+              <path d="M8 16C12.4107 16 16 12.4107 16 8C16 3.58934 12.4107 0 8 0C3.5893 0 0 3.58934 0 8C0 12.4107 3.58934 16 8 16ZM8 1.06665C11.824 1.06665 14.9334 4.17597 14.9334 8C14.9334 11.824 11.824 14.9334 8 14.9334C4.17597 14.9334 1.06665 11.824 1.06665 8C1.06665 4.17597 4.17602 1.06665 8 1.06665Z" fill="#707070"/>
+              <path d="M10.3335 10.5494C10.4321 10.6294 10.5494 10.6667 10.6668 10.6667C10.8241 10.6667 10.9788 10.5974 11.0828 10.4667C11.2668 10.2374 11.2294 9.90138 11.0001 9.71737L8.53345 7.74403V3.73337C8.53345 3.44003 8.29346 3.20004 8.00012 3.20004C7.70678 3.20004 7.4668 3.44003 7.4668 3.73337V8.00005C7.4668 8.16273 7.54148 8.31472 7.66679 8.41603L10.3335 10.5494Z" fill="#707070"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_746_95421">
+                <rect width="16" height="16" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg> ${query}
+          </div>`)
+        .join('');
+    }
+
+    if (shouldShowSuggestions) {
+      html += '<div style="padding: 8px; font-weight: 330; font-size: 14px; color: #8A8A8A;">Trending Search</div>';
+      html += suggestions
+        .map((suggestion) => `
+          <div class="global-suggestion-item" style="padding: 8px; cursor: pointer;" data-raw-value="${suggestion.rawValue}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0065 7.33324C12.0065 9.7264 10.0664 11.6665 7.67318 11.6665C5.27993 11.6665 3.33984 9.7264 3.33984 7.33324C3.33984 4.94007 5.27993 3 7.67318 3C10.0664 3 12.0065 4.94007 12.0065 7.33324ZM11.0743 11.4414C10.1512 12.2066 8.96589 12.6665 7.67318 12.6665C4.72766 12.6665 2.33984 10.2787 2.33984 7.33324C2.33984 4.38777 4.72766 2 7.67318 2C10.6187 2 13.0065 4.38777 13.0065 7.33324C13.0065 8.62593 12.5466 9.81119 11.7815 10.7343L14.0267 12.9796L14.3803 13.3331L13.6732 14.0402L13.3196 13.6867L11.0743 11.4414Z" fill="#707070"/>
+          </svg> ${suggestion.highlightedValue}
+          </div>`)
+        .join('');
+    }
+
+    suggestionPopup.innerHTML = html;
+    suggestionPopup.style.display = 'block';
+
+    // Event bindings
+    if (shouldShowSuggestions) {
+      suggestions.forEach((suggestion, index) => {
+        const item = suggestionPopup.querySelectorAll('.global-suggestion-item')[index];
+        item.addEventListener('click', () => {
+          const { rawValue } = suggestion;
+          searchBox.value = rawValue;
+          saveQueryToLocalHistory(rawValue);
+          standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${rawValue}&contentType=${selectedContentType}`);
+          standaloneSearchBoxController.selectSuggestion(rawValue);
+          suggestionPopup.style.display = 'none';
+        });
+      });
+    }
+
+    if (shouldShowHistory) {
+      const historyItems = suggestionPopup.querySelectorAll('.global-history-item');
+      historyItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          const rawValue = item.getAttribute('data-query');
+          searchBox.value = rawValue;
+          saveQueryToLocalHistory(rawValue);
+          standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${rawValue}&contentType=${selectedContentType}`);
+          standaloneSearchBoxController.submit();
+          suggestionPopup.style.display = 'none';
+        });
+      });
+    }
+  } else {
+    suggestionPopup.style.display = 'none';
+  }
+};
+function registerDropdown(dropdown) {
+  if (!dropdown) return;
+  const btn = dropdown.querySelector('.dropbtn');
+  const content = dropdown.querySelector('.dropdown-content');
+  if (!btn || !content) return;
+  btn.setAttribute('aria-expanded', 'false');
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = content.style.display === 'block';
+    // close other dropdowns
+    this.querySelectorAll('.dropdown-content').forEach((c) => {
+      if (c !== content) c.style.display = 'none';
+    });
+    content.style.display = isOpen ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  });
+  content.addEventListener('click', (e) => e.stopPropagation());
+}
+
+function createGlobalSearch() {
+  const suggestionPopup = document.getElementById('global-suggestion-popup');
+  const searchContainer = document.createElement('div');
+  searchContainer.className = 'standalone-search-container';
+  // hide by default on mobile; will be toggled by the search button
+  if (canMobileActions()) {
+    // searchContainer.classList.add('tw-hidden');
+  }
+
+  const searchBox = document.createElement('input');
+  searchBox.type = 'text';
+  searchBox.placeholder = 'Search';
+  searchBox.className = 'standalone-search-box';
+  searchBox.id = 'standalone-search-box';
+  searchBox.maxLength = 200;
+
+  const tooltip = document.createElement('div');
+  tooltip.id = 'char-limit-tooltip';
+  tooltip.className = 'char-limit-tooltip';
+  tooltip.textContent = 'Input exceeds the limit. Please search within 200 characters';
+  tooltip.style.display = 'none';
+
+  const dropdown = document.createElement('div');
+  dropdown.className = 'dropdown';
+
+  const dropbtn = document.createElement('button');
+  dropbtn.className = 'dropbtn';
+  const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+  <path d="M14.7344 5L8.73437 11L2.73438 5" stroke="#141414"/>
+  </svg>`;
+  dropbtn.innerHTML = `All ${downArrow}`;
+
+  const dropdownContent = document.createElement('div');
+  dropdownContent.className = 'dropdown-content search-type-dropdown-content';
+  dropdownContent.style.display = 'none';
+
+  const menuItems = {
+    All: 'All',
+    "Applications":"Applications",
+    "eCommerce":"eCommerce",
+    "Knowledge base articles":"Knowledge base articles",
+    "Products and services":"Products and services",
+    "Regulatory documents":"Regulatory documents",
+    "SCIEX How":"SCIEX How",
+    "Technical notes":"Technical notes",
+    "Training":"Training",
+    "User guides":"User guides",
+  };
+
+  let selectedContentType = 'All';
+
+  standaloneSearchBoxController.subscribe(() => {
+    const suggestions = standaloneSearchBoxController.state.suggestions || [];
+    if (suggestions.length > 0 && searchBox.value) {
+      showSuggestions(selectedContentType, true);
+    }
+  });
+
+  searchBox.addEventListener('focus', () => {
+    showSuggestions(selectedContentType, true);
+  });
+
+  searchBox.addEventListener('blur', () => {
+    setTimeout(() => {
+      suggestionPopup.style.display = 'none';
+    }, 150);
+  });
+
+  Object.keys(menuItems).forEach((key) => {
+    const value = menuItems[key];
+    const anchorElement = document.createElement('a');
+    anchorElement.href = '#';
+    if (key === 'All') anchorElement.className = 'drodown-content-all';
+    anchorElement.textContent = value;
+    anchorElement.addEventListener('click', (event) => {
+      event.preventDefault();
+      dropbtn.innerHTML = value + downArrow;
+      dropdownContent.style.display = 'none';
+      selectedContentType = value;
+    });
+    dropdownContent.appendChild(anchorElement);
+  });
+
+  dropdown.appendChild(dropbtn);
+  dropdown.appendChild(dropdownContent);
+  searchContainer.appendChild(searchBox);
+  searchContainer.appendChild(tooltip);
+  searchContainer.appendChild(dropdown);
+
+  // Register dropdown behaviour (click to toggle, click outside to close)
+  registerDropdown(dropdown);
+
+  const searchBtn = document.createElement('button');
+  searchBtn.className = 'global-search-btn';
+  const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <path d="M9.50977 2.50879C13.0322 2.68736 15.833 5.60023 15.833 9.16699L15.8242 9.50977C15.7468 11.0363 15.1548 12.4264 14.2197 13.5127L17.374 16.667L16.667 17.374L13.5127 14.2197C12.3457 15.2244 10.8278 15.8329 9.16699 15.833L8.82324 15.8242C5.41465 15.6513 2.68168 12.9183 2.50879 9.50977L2.5 9.16699C2.5 5.48516 5.48509 2.5 9.16699 2.5L9.50977 2.50879ZM9.16699 3.5C6.03736 3.5 3.5 6.03746 3.5 9.16699C3.50026 12.2963 6.03753 14.833 9.16699 14.833C12.2963 14.8328 14.8327 12.2962 14.833 9.16699C14.833 6.03757 12.2965 3.50018 9.16699 3.5Z" fill="#141414"/>
+</svg>`;
+  searchBtn.innerHTML = searchIcon;
+  searchContainer.appendChild(searchBtn);
+
+  // Prevent clicks inside search container from closing dropdowns
+  searchContainer.addEventListener('click', (e) => e.stopPropagation());
+
+  searchBtn.addEventListener('click', (event) => {
+    if (searchBox.value.trim() !== '') {
+      standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${searchBox.value}&contentType=${selectedContentType}`);
+      standaloneSearchBoxController.submit();
+    } else {
+      standaloneSearchBoxController.submit();
+    }
+    event.stopPropagation();
+  });
+
+  dropbtn.addEventListener('click', () => {
+    // e.stopPropagation();
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Close any open dropdowns when clicking outside
+  /* document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-content').forEach((c) => {
+      c.style.display = 'none';
+    });
+  }); */
+
+  searchBox.addEventListener('input', (event) => {
+    const query = event.target.value;
+    if (query.length > 0) {
+      standaloneSearchBoxController.updateText(query);
+      standaloneSearchBoxController.showSuggestions();
+      showSuggestions(selectedContentType);
+    } else {
+      standaloneSearchBoxController.updateText('');
+      suggestionPopup.style.display = 'none';
+    }
+  });
+
+  searchBox.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && event.target.value.trim() !== '') {
+      standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${event.target.value}&contentType=${selectedContentType}`);
+      standaloneSearchBoxController.submit();
+    }
+  });
+
+  searchBox.addEventListener('input', () => {
+    if (searchBox.value.length >= 200) {
+      tooltip.style.display = 'block';
+      searchContainer.classList.add('char-limit-reached');
+    } else {
+      tooltip.style.display = 'none';
+      searchContainer.classList.remove('char-limit-reached');
+    }
+  });
+
+  searchBox.addEventListener('blur', () => {
+    tooltip.style.display = 'none';
+  });
+
+  return searchContainer;
+}
 function createMainHeader(section) {
   const menuDiv = div({
     class:
@@ -179,6 +493,134 @@ function createMainHeader(section) {
         class:
           'tw-ml-16 tw-flex tw-items-center hover:tw-text-white tw-transition-colors',
       });
+
+      if (anchorTag.text === 'Login' || anchorTag.text === 'My account') {
+        // anchorTag.addEventListener('click', handleSignInClick);
+        // anchorTag.href = 'https://devcs.sciex.com/bin/sciex/login';
+      // }else if (anchorTag.text === 'My account'){
+        const dropdown = document.createElement('div');
+        dropdown.id = 'accountDropdown';
+        dropdown.className = 'dropdown ';
+
+        const dropbtn = document.createElement('button');
+        dropbtn.className = 'dropbtn login-dropdown';
+        const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+        <path d="M14.7344 5L8.73437 11L2.73438 5" stroke="#FFFFFF"/>
+        </svg>`;
+        dropbtn.innerHTML = `${downArrow}`;
+
+        const dropdownContent = document.createElement('div');
+        dropdownContent.className = 'dropdown-content account-dropdown-content';
+        dropdownContent.style.display = 'none';
+        // register dropdown toggle behaviour
+        registerDropdown(dropdown);
+
+        const menuItems = {
+          Button: 'Button',
+          'Already have an account?Sign In Now': 'Already have an account?<span class = "sign-in-now-link" >Sign In Now</span>',
+          'My profile': 'My profile',
+          'My favorite resources': 'My favorite resources',
+          Logout: 'Logout',
+        };
+        // liTag.append(dropdown);
+
+        /* standaloneSearchBoxController.subscribe(() => {
+          const suggestions = standaloneSearchBoxController.state.suggestions || [];
+          if (suggestions.length > 0 && searchBox.value) {
+            showSuggestions(selectedContentType, true);
+          }
+        }); */
+
+        Object.keys(menuItems).forEach((key) => {
+          const value = menuItems[key];
+          let anchorElement = document.createElement('a');
+          if (key === 'Button' && anchorTag.text === 'Login') {
+            anchorElement = document.createElement('div');
+            anchorElement.innerHTML = '<a href="/support/create-account"><button class=" create-account-btn">Create an account</button></a>';
+          } else {
+            anchorElement = document.createElement('a');
+            anchorElement.href = '#';
+            if (key === 'My profile') {
+              const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <g clip-path="url(#clip0_137_8473)">
+                  <mask id="mask0_137_8473" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                    <path d="M0 1.90735e-06H18V18H0V1.90735e-06Z" fill="white"/>
+                  </mask>
+                  <g mask="url(#mask0_137_8473)">
+                    <path d="M17.4727 9C17.4727 13.6793 13.6793 17.4727 9 17.4727C4.3206 17.4727 0.527344 13.6793 0.527344 9C0.527344 4.3206 4.3206 0.527346 9 0.527346C13.6793 0.527346 17.4727 4.3206 17.4727 9Z" stroke="black" stroke-width="1.125" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.3891 7.87022C12.3891 9.74193 10.8718 11.2593 9.00006 11.2593C7.1282 11.2593 5.61096 9.74193 5.61096 7.87022C5.61096 5.99853 7.1282 4.48119 9.00006 4.48119C10.8718 4.48119 12.3891 5.99853 12.3891 7.87022Z" stroke="black" stroke-width="1.125" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.94495 15.8002C4.216 13.2478 6.37572 11.2595 8.99996 11.2595C11.6243 11.2595 13.7839 13.2479 14.0549 15.8003" stroke="black" stroke-width="1.125" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                </g>
+                <defs>
+                  <clipPath id="clip0_137_8473">
+                    <rect width="18" height="18" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>`;
+              anchorElement.innerHTML = `${icon} ${key}`;
+              anchorElement.href = myprofile;
+              anchorElement.classList.add('myprofile-div');
+            } else if (key === 'My favorite resources') {
+              const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 30 30" fill="none" stroke = "black" stroke-width="1.5" >
+          <path d="M22.75 4.5V24.7344L15.3652 16.8584L15 16.4688L14.6348 16.8584L7.25 24.7344V4.5H22.75Z" />
+            </svg>`;
+              anchorElement.innerHTML = `${icon} ${key}`;
+              anchorElement.href = myFavoriteResources;
+              anchorElement.classList.add('myprofile-div');
+            } else if (key === 'Logout' && anchorTag.text === 'My account') {
+              const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <g clip-path="url(#clip0_160_16974)">
+                    <path d="M9.61981 4.88509V3.37751C9.61981 2.97768 9.46098 2.59422 9.17825 2.31149C8.89553 2.02877 8.51207 1.86993 8.11223 1.86993H2.8357C2.43587 1.86993 2.05241 2.02877 1.76968 2.31149C1.48696 2.59422 1.32813 2.97768 1.32812 3.37751V12.423C1.32813 12.8228 1.48696 13.2063 1.76968 13.489C2.05241 13.7717 2.43587 13.9306 2.8357 13.9306H8.11223C8.51207 13.9306 8.89553 13.7717 9.17825 13.489C9.46098 13.2063 9.61981 12.8228 9.61981 12.423V10.9154" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.85059 7.90022H14.8961L12.6347 5.63885" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.6348 10.1616L14.8961 7.90021" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_160_16974">
+                      <rect width="16" height="16" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>`;
+              anchorElement.innerHTML = `${icon} ${key}`;
+              anchorElement.classList.add('myprofile-div');
+              anchorElement.href = 'https://devcs.sciex.com/bin/sciex/logout';
+            } else if (key === 'Already have an account?Sign In Now') {
+              anchorElement.id = 'signInNowLink';
+              if (anchorTag.text === 'Login') {
+                anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
+                anchorElement.innerHTML = `${value}`;
+              } else if (anchorTag.text === 'My account') {
+                (async function () {
+                  const userData = await getUserDetails();
+                  if (userData && userData.loggedIn) {
+                    anchorElement.innerHTML = `<span class="username-span">${userData.familyName} ${userData.givenName}</span>`;
+                  }
+                }());
+              }
+              // anchorElement.classList.add('myprofile-div');
+            }
+            // close dropdown on item click
+            anchorElement.addEventListener('click', () => {
+              dropdownContent.style.display = 'none';
+            });
+          }
+          dropdownContent.appendChild(anchorElement);
+        });
+        dropbtn.addEventListener('click', () => {
+          if (dropdownContent.style.display === 'block') {
+            dropdownContent.style.display = 'none';
+          } else {
+            dropdownContent.style.display = 'block';
+          }
+          // dropdownContent.style.display = 'block';
+        });
+        dropdown.appendChild(dropbtn);
+        dropdown.appendChild(dropdownContent);
+        // store dropdown reference keyed by anchor
+        dropdownMap.set(anchorTag, dropdown);
+        /// ///
+      }
+
       const liId = anchorTag.text;
       liTag.id = liId
         .replace(/ /g, '-')
@@ -1169,11 +1611,11 @@ function createMegaMenuThirdLevel(child) {
 
   // First part preparation
   const firstpartdiv = div({
-    class: 'tw-w-3/12 submenu-links tw-border-r tw-relative tw-pr-24',
+    class: 'tw-w-3/12 submenu-links tw-border-r tw-relative tw-pr-24 tw-self-start',
   });
 
   const secondPartdiv = div({
-    class: 'tw-w-6/12 submenu-content tw-px-32 tw-pr-40 tw-border-r',
+    class: 'tw-w-6/12 submenu-content tw-px-32 tw-pr-40 tw-border-r tw-self-start',
   });
   const wrapdiv = div({ class: 'tw-flex tw-flex-wrap tw-h-fit' });
   const viewAllTag = document.createElement('a');
@@ -1345,10 +1787,10 @@ function createMegaMenuThirdLevel(child) {
             createViewallTag(list, viewAllTag);
           }
         }
-      }
+      } 
     });
   } else if (sections.length > 0 && isSubItems) {
-    secondPartdiv.className = 'tw-w-9/12 submenu-content tw-px-32 tw-pr-40';
+    secondPartdiv.className = 'tw-w-9/12 submenu-content tw-px-32 tw-pr-40 tw-self-start';
     wrapdiv.className = 'tw-flex tw-flex-wrap tw-h-fit';
     sections.forEach((section, index) => {
       if (index === 0) {

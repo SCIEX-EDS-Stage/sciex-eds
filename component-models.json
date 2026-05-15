@@ -283,8 +283,12 @@
             "value": "text-white-background"
           },
           {
-            "name": "Gray",
+            "name": "Grey",
             "value": "text-grey-background"
+          },
+          {
+            "name": "Lite Grey",
+            "value": "text-lite-grey-background"
           },
           {
             "name": "Blue",
@@ -940,6 +944,96 @@
     ]
   },
   {
+    "id": "course-catalog-detail",
+    "fields": [
+      {
+        "component": "text",
+        "name": "catalogID",
+        "label": "Catalog ID",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Course Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "url",
+        "label": "Course URL",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "rating",
+        "label": "Course Rating",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "duration",
+        "label": "Duration",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "regiontags",
+        "label": "Region",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "courseType",
+        "label": "Course Type",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "courseLevel",
+        "label": "Course Level",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "relatedResources",
+        "label": "Related Resources",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "name": "isfree",
+        "label": "Is Free",
+        "valueType": "boolean"
+      },
+      {
+        "component": "boolean",
+        "name": "isInEcommerce",
+        "label": "In Ecommerce",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "trainingType",
+        "label": "Training Type",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-tag",
+        "valueType": "string",
+        "name": "categories",
+        "label": "course Tags ",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "coursecatalog",
     "fields": [
       {
@@ -1563,6 +1657,13 @@
         "valueType": "string",
         "name": "enterTheLinks",
         "label": "Enter the links"
+      },
+      {
+        "component": "boolean",
+        "name": "openLinkInNewTab",
+        "label": "Open link in new tab",
+        "value": false,
+        "valueType": "boolean"
       }
     ]
   },
@@ -2310,6 +2411,142 @@
     ]
   },
   {
+    "id": "knowledge-base-article",
+    "fields": [
+      {
+        "component": "text",
+        "name": "versionId",
+        "label": "Version ID",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "knowledgeArticleId",
+        "label": "Knowledge Article ID",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "articleId",
+        "label": "Article ID",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "urlName",
+        "label": "URL Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "textarea",
+        "name": "summary",
+        "label": "Summary",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "body",
+        "label": "Body",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "publishStatus",
+        "label": "Publish Status",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Online",
+            "value": "Online"
+          },
+          {
+            "name": "Draft",
+            "value": "Draft"
+          },
+          {
+            "name": "Archived",
+            "value": "Archived"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "syncStatus",
+        "label": "Sync Status",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "New",
+            "value": "New"
+          },
+          {
+            "name": "Updated",
+            "value": "Updated"
+          },
+          {
+            "name": "Synced",
+            "value": "Synced"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "language",
+        "label": "Language",
+        "valueType": "string"
+      },
+      {
+        "component": "date",
+        "name": "createdDate",
+        "label": "Created Date",
+        "valueType": "string"
+      },
+      {
+        "component": "checkbox",
+        "name": "entitledContent",
+        "label": "Entitled Content",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "articleType",
+        "label": "Article Type",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "tagNames",
+        "label": "Tag Names",
+        "valueType": "string"
+      },
+      {
+        "component": "number",
+        "name": "voteAvg",
+        "label": "Average Vote",
+        "valueType": "number"
+      },
+      {
+        "component": "checkbox",
+        "name": "currentUserHasVoted",
+        "label": "Current User Has Voted",
+        "valueType": "boolean",
+        "value": false
+      },
+      {
+        "component": "number",
+        "name": "currentUserScore",
+        "label": "Current User Score",
+        "valueType": "number"
+      }
+    ]
+  },
+  {
     "id": "regulatory-document",
     "fields": [
       {
@@ -2528,6 +2765,20 @@
             "value": "hide"
           }
         ]
+      },
+      {
+        "component": "boolean",
+        "name": "pfasStyle",
+        "label": "Enable Pfas Style",
+        "value": false,
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "button",
+        "label": "Button",
+        "value": ""
       }
     ]
   },
@@ -2703,6 +2954,93 @@
             "value": "_blank"
           }
         ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "gridLabel",
+        "label": "gridLabel",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "sciex-border",
+    "fields": [
+      {
+        "component": "select",
+        "name": "borderWidth",
+        "label": "Border width",
+        "valueType": "string",
+        "value": "1px",
+        "options": [
+          {
+            "name": "1px",
+            "value": "1px"
+          },
+          {
+            "name": "2px",
+            "value": "2px"
+          },
+          {
+            "name": "3px",
+            "value": "3px"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "borderStyle",
+        "label": "Border style",
+        "valueType": "string",
+        "value": "solid",
+        "options": [
+          {
+            "name": "Solid",
+            "value": "solid"
+          },
+          {
+            "name": "Dashed",
+            "value": "dashed"
+          },
+          {
+            "name": "Dotted",
+            "value": "dotted"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "borderColor",
+        "label": "Border color",
+        "valueType": "string",
+        "value": "border-black",
+        "options": [
+          {
+            "name": "Black",
+            "value": "border-black"
+          },
+          {
+            "name": "Blue",
+            "value": "border-blue"
+          },
+          {
+            "name": "Grey",
+            "value": "border-grey"
+          },
+          {
+            "name": "White",
+            "value": "border-white"
+          },
+          {
+            "name": "Light Grey",
+            "value": "border-light-grey"
+          },
+          {
+            "name": "Soft Grey",
+            "value": "border-soft-grey"
+          }
+        ]
       }
     ]
   },
@@ -2794,6 +3132,83 @@
             "value": "_blank"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "sciex-columns",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sciexColumnsId",
+        "label": "Sciex Columns Id",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sciexColumnsheading",
+        "label": "Sciex Columns Heading",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "name": "grid",
+        "label": "Select how many cards in a column",
+        "value": "",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "4"
+          },
+          {
+            "name": "3-columns",
+            "value": "3"
+          },
+          {
+            "name": "2-columns",
+            "value": "2"
+          },
+          {
+            "name": "1-columns",
+            "value": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sciex-columns-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "itemHeading",
+        "label": "Heading",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "authorImage",
+        "label": "Author Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "authorName",
+        "label": "Author Name",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "authorDetails",
+        "value": "",
+        "label": "Author Deatails",
+        "valueType": "string"
       }
     ]
   },
@@ -3463,6 +3878,20 @@
         "valueType": "string",
         "name": "text",
         "label": "Text"
+      },
+      {
+        "component": "number",
+        "name": "paddingTop",
+        "label": "Padding Top (px)",
+        "valueType": "number",
+        "value": 32
+      },
+      {
+        "component": "number",
+        "name": "paddingBottom",
+        "label": "Padding Bottom (px)",
+        "valueType": "number",
+        "value": 32
       }
     ]
   },
@@ -3885,6 +4314,29 @@
         "name": "tabId",
         "value": "",
         "label": "Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tab-button",
+    "fields": [
+      {
+        "component": "text",
+        "name": "buttonName",
+        "label": "Button Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "buttonId",
+        "label": "Id",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "buttonHref",
+        "label": "Button Link (Href)",
         "valueType": "string"
       }
     ]
