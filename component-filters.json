@@ -68,7 +68,11 @@
       "favorite-all",
       "contact-information",
       "sciex-headquarters",
-      "image-varient"
+      "image-varient",
+      "sciex-columns",
+      "knowledge-base-article",
+      "sciex-border",
+      "course-catalog-detail"
     ]
   },
   {
@@ -165,6 +169,12 @@
     "id": "sciex-buttons",
     "components": [
       "sciex-button"
+    ]
+  },
+  {
+    "id": "sciex-columns",
+    "components": [
+      "sciex-columns-item"
     ]
   },
   {
@@ -272,7 +282,8 @@
   {
     "id": "tabs-nav",
     "components": [
-      "tab"
+      "tab",
+      "tab-button"
     ]
   },
   {
